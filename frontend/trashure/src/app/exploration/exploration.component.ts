@@ -7,7 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ExplorationComponent implements OnInit {
 
-  constructor() { }
+  latitude: number;
+  longitude: number;
+
+  constructor() {
+    this.latitude = 52.391223;
+    this.longitude = 4.921798;
+  }
 
   ngOnInit() {
   }

@@ -11,17 +11,24 @@ import { MatTableModule } from '@angular/material';
 import { AppRoutingModule } from './/app-routing.module';
 import { ExplorationComponent } from './exploration/exploration.component';
 
+import { AgmCoreModule } from '@agm/core';
+import { StreetviewComponent } from './streetview/streetview.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     LeaderboardComponent,
     TrashureMenuComponent,
-    ExplorationComponent
+    ExplorationComponent,
+    StreetviewComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     LayoutModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDKv-vShjESv1Hwkn3FCqPUj-Ff7BW17ic'
+    }),
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,

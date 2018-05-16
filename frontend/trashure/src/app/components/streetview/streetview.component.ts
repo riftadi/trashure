@@ -19,6 +19,7 @@ export class StreetviewComponent implements OnInit {
   @Input() pitch: number = 10;
   @Input() scrollwheel: boolean = false;
   @Output() scoreEvent: EventEmitter<number> = new EventEmitter<number>();
+  @Output() mapsReady = new EventEmitter();
   google: any;
   map: any;
   streetview: any;
@@ -33,6 +34,7 @@ export class StreetviewComponent implements OnInit {
         this.initMap();
         this.initStreetview();
         this.addCoins();
+        this.mapsReady.emit();
       });
     }
   }

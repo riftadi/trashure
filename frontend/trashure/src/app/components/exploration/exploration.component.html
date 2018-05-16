@@ -1,2 +1,10 @@
-<a href="/"><button mat-raised-button>Main menu</button></a><h3>Score: {{ score }}</h3>
-<app-streetview (scoreEvent)="addScore($event)" [longitude]="longitude" [latitude]="latitude"></app-streetview>
+<a href="/">
+  <button mat-raised-button>
+    <i class="material-icons">arrow_back</i> Main menu</button>
+</a>
+<h3>Score: {{ score }}</h3>
+<h3 *ngIf="!finished">Time left: {{ timer }}</h3>
+<h3 *ngIf="finished">DONE!</h3>
+<div>
+  <app-streetview (scoreEvent)="addScore($event)" (mapsReady)="startTimer()" [longitude]="longitude" [latitude]="latitude"></app-streetview>
+</div>

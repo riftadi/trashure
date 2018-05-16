@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {HighScore} from "../../models/highscore";
+import {ScoresService} from "../../services/scores.service";
 
 @Component({
   selector: 'app-leaderboard',
@@ -9,24 +11,13 @@ export class LeaderboardComponent implements OnInit {
 
   displayedColumns = ['position', 'name', 'score'];
   // HARDCODED FOR NOW
-  dataSource = HIGHSCORE_DATA;
+  dataSource: HighScore[];
 
-  constructor() { }
+  constructor(public scores: ScoresService) {
+  }
 
   ngOnInit() {
+    this.scores.getHighScores().subscribe(x => this.dataSource = x);
   }
 
 }
-
-export interface HighScore {
-  position: number;
-  name: string;
-  score: number;
-}
-
-const HIGHSCORE_DATA: HighScore[] = [
-  {position: 1, name: 'Cool guy', score: 500},
-  {position: 2, name: 'Less cool guy', score: 400},
-  {position: 3, name: 'Uncool guy', score: 340},
-  {position: 4, name: 'Subzero guy', score: 300}
-];

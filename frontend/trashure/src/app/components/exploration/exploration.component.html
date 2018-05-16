@@ -1,0 +1,2 @@
+<a href="/"><button mat-raised-button>Main menu</button></a><h3>Score: {{ score }}</h3>
+<app-streetview (scoreEvent)="addScore($event)" [longitude]="longitude" [latitude]="latitude"></app-streetview>

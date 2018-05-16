@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TrashureMenuComponent } from './trashure-menu.component';
+import { StreetviewComponent } from './streetview.component.ts';
 
-describe('TrashureMenuComponent', () => {
-  let component: TrashureMenuComponent;
-  let fixture: ComponentFixture<TrashureMenuComponent>;
+describe('StreetviewComponent', () => {
+  let component: StreetviewComponent;
+  let fixture: ComponentFixture<StreetviewComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TrashureMenuComponent ]
+      declarations: [ StreetviewComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TrashureMenuComponent);
+    fixture = TestBed.createComponent(StreetviewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

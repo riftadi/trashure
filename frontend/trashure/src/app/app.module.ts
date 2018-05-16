@@ -5,14 +5,16 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatGridListModule, MatCardModule, MatMenuModule } from '@angular/material';
-import { LeaderboardComponent } from './leaderboard/leaderboard.component';
-import { TrashureMenuComponent } from './trashure-menu/trashure-menu.component';
+
 import { MatTableModule } from '@angular/material';
 import { AppRoutingModule } from './/app-routing.module';
-import { ExplorationComponent } from './exploration/exploration.component';
 
 import { AgmCoreModule } from '@agm/core';
-import { StreetviewComponent } from './streetview/streetview.component';
+
+import {LeaderboardComponent} from "./components/leaderboard/leaderboard.component";
+import {TrashureMenuComponent} from "./components/trashure-menu/trashure-menu.component";
+import {ExplorationComponent} from "./components/exploration/exploration.component";
+import {StreetviewComponent} from "./components/streetview/streetview.component";
 
 @NgModule({
   declarations: [

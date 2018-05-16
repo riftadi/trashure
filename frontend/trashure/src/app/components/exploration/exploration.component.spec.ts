@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StreetviewComponent } from './streetview.component';
+import { ExplorationComponent } from './exploration.component.ts';
 
-describe('StreetviewComponent', () => {
-  let component: StreetviewComponent;
-  let fixture: ComponentFixture<StreetviewComponent>;
+describe('ExplorationComponent', () => {
+  let component: ExplorationComponent;
+  let fixture: ComponentFixture<ExplorationComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StreetviewComponent ]
+      declarations: [ ExplorationComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(StreetviewComponent);
+    fixture = TestBed.createComponent(ExplorationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

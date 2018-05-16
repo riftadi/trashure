@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {ExplorationComponent} from "./exploration/exploration.component";
-import {TrashureMenuComponent} from "./trashure-menu/trashure-menu.component";
+import {TrashureMenuComponent} from "./components/trashure-menu/trashure-menu.component";
+import {ExplorationComponent} from "./components/exploration/exploration.component";
 
 const routes: Routes = [
   { path: '', component: TrashureMenuComponent },

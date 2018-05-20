@@ -5,6 +5,11 @@
 <h3>Score: {{ score }}</h3>
 <h3 *ngIf="!finished">Time left: {{ timer }}</h3>
 <h3 *ngIf="finished">DONE!</h3>
-<div>
-  <app-streetview (scoreEvent)="addScore($event)" (mapsReady)="startTimer()" [longitude]="longitude" [latitude]="latitude"></app-streetview>
+<div *ngIf="gameObject">
+  <app-streetview
+    (scoreEvent)="addScore($event)"
+    (mapsReady)="startTimer()"
+    [game]="gameObject"
+  >
+  </app-streetview>
 </div>

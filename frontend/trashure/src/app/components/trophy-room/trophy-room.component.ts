@@ -14,7 +14,7 @@ export class TrophyRoomComponent implements OnInit {
   constructor(private scores: ScoresService) { }
 
   ngOnInit() {
-    this.scores.getTrophies().subscribe(x => {console.log(x); this.trophies = x; });
+    this.scores.getTrophies().subscribe(x => this.trophies = x);
   }
 
 }

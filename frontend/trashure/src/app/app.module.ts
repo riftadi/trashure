@@ -26,6 +26,7 @@ import {ScoresService} from "./services/scores/scores.service";
 import {AuthGuardService} from "./services/auth-guard/auth-guard.service";
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import {GameService} from "./services/game/game.service";
 
 
 @NgModule({
@@ -68,7 +69,8 @@ import { RegisterComponent } from './components/register/register.component';
   ],
   providers: [
     ScoresService,
-    AuthGuardService
+    AuthGuardService,
+    GameService
   ],
   bootstrap: [AppComponent]
 })

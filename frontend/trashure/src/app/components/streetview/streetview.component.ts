@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, EventEmitter, Input, Output, Inject, PLAT
 import { MapsAPILoader } from '@agm/core';
 import { isPlatformBrowser } from '@angular/common';
 import { ScoreTypes } from '../../models/scoretypes'
+import {Game} from "../../models/game";
 
 @Component({
   selector: 'app-streetview',
@@ -12,8 +13,7 @@ export class StreetviewComponent implements OnInit {
 
   @ViewChild('streetviewMap') streetviewMap: any;
   @ViewChild('streetviewPano') streetviewPano: any;
-  @Input() latitude: number = 52.391223;
-  @Input() longitude: number = 4.921798;
+  @Input() game: Game;
   @Input() zoom: number = 14;
   @Input() heading: number = 34;
   @Input() pitch: number = 10;
@@ -22,7 +22,9 @@ export class StreetviewComponent implements OnInit {
   @Output() mapsReady = new EventEmitter();
   google: any;
   map: any;
+  bounds: any;
   streetview: any;
+  lastPosition: any;
   coins = {};
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object, private mapsAPILoader: MapsAPILoader) { }
@@ -42,22 +44,57 @@ export class StreetviewComponent implements OnInit {
   initMap() {
     this.map = new this.google.maps.Map(
       this.streetviewMap.nativeElement, {
-        center: { lat: this.latitude, lng: this.longitude },
+        center: { lat: this.game.area.latitudeStart, lng: this.game.area.longitudeStart },
         zoom: this.zoom,
-        streetViewControl: true,
+        fullscreenControl: false,
         scrollwheel: this.scrollwheel
       });
+
+    this.bounds = new this.google.maps.LatLngBounds(
+      new this.google.maps.LatLng(this.game.area.latitudeStart, this.game.area.longitudeStart),
+      new this.google.maps.LatLng(this.game.area.latitudeEnd, this.game.area.longitudeEnd)
+    );
+
+    var rectangle = new this.google.maps.Rectangle({
+      strokeColor: '#FF0000',
+      strokeOpacity: 0.8,
+      strokeWeight: 2,
+      fillColor: '#FF0000',
+      fillOpacity: 0.35,
+      map: this.map,
+      bounds: this.bounds
+    });
   }
 
   initStreetview() {
 
     this.streetview = new this.google.maps.StreetViewPanorama(
       this.streetviewPano.nativeElement, {
-        position: { lat: this.latitude, lng: this.longitude },
+        position: { lat: this.game.area.latitudeStart, lng: this.game.area.longitudeStart },
         pov: { heading: this.heading, pitch: this.pitch },
-        scrollwheel: this.scrollwheel
+        fullscreenControl: false,
+        motionTrackingControl: false,
+        addressControl: false,
+        scrollwheel: this.scrollwheel,
+        linksControl: false
       });
     this.map.setStreetView(this.streetview);
+
+    this.lastPosition = this.streetview.getPosition();
+
+    let context = this;
+
+    this.streetview.addListener('position_changed', function() {
+      if (context.bounds.contains(context.streetview.getPosition()))
+      {
+        context.lastPosition = context.streetview.getPosition();
+      }else{
+        console.log("Tried to move out of bounds");
+        alert("Please stay inside the task region");
+        context.streetview.setPosition(context.lastPosition);
+      }
+    });
+
   }
 
   addCoins() {
@@ -71,7 +108,7 @@ export class StreetviewComponent implements OnInit {
     for(let i = 0;i<=100;i++) {
       let coinMarker = new this.google.maps.Marker({
         id: i,
-        position: {lat: this.latitude + (Math.random() * i / 1000), lng: this.longitude  + (Math.random() * i / 1000)},
+        position: {lat: this.game.area.latitudeStart + (Math.random() * i / 1000), lng: this.game.area.longitudeStart  + (Math.random() * i / 1000)},
         map: this.streetview,
         icon: icon,
         title: 'Coin'

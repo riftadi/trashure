@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import {Router} from "@angular/router";
 import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {GameService} from "../../services/game/game.service";
 
 @Component({
   selector: 'app-finishedgamedialog',
@@ -9,9 +10,11 @@ import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 })
 export class FinishedGameDialogComponent {
 
+  disable = false;
+
   constructor(
     public dialogRef: MatDialogRef<FinishedGameDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any, private router: Router) {
+    @Inject(MAT_DIALOG_DATA) public data: any, private router: Router, private game: GameService) {
     dialogRef.disableClose = true;
   }
 
@@ -20,7 +23,11 @@ export class FinishedGameDialogComponent {
   }
 
   onYesClick(): void {
-    location.reload();
+    this.disable = true;
+    this.game.getGame().subscribe(x => {
+      this.game.startGame(x);
+      this.dialogRef.close();
+    });
   }
 
 }

@@ -2,7 +2,7 @@
   <mat-card>
     <mat-card-title>Main menu</mat-card-title>
     <mat-card-content>
-      <a [routerLink]="['/game/exploration']"><button mat-raised-button>Start game</button></a>
+      <button mat-raised-button (click)="startGame()">Start game</button>
     </mat-card-content>
   </mat-card>
   <app-leaderboard></app-leaderboard>

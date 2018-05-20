@@ -1,6 +1,9 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {FinishedGameDialogComponent} from "../finishedgamedialog/finishedgamedialog.component";
+import {GameService} from "../../services/game/game.service";
+import {Router} from "@angular/router";
+import {Game} from "../../models/game";
 
 @Component({
   selector: 'app-exploration',
@@ -9,15 +12,29 @@ import {FinishedGameDialogComponent} from "../finishedgamedialog/finishedgamedia
 })
 export class ExplorationComponent {
 
+  TIME_LIMIT: number = 4;
   score: number = 0;
   latitude: number;
   longitude: number;
-  timer: number = 100;
+  timer: number = this.TIME_LIMIT;
   finished: boolean = false;
+  gameObject: Game;
 
-  constructor(private cdRef:ChangeDetectorRef, public dialog: MatDialog) {
-    this.latitude = 52.391223;
-    this.longitude = 4.921798;
+  constructor(private cdRef:ChangeDetectorRef, public game: GameService, public dialog: MatDialog, private router: Router) {
+  }
+
+  ngOnInit() {
+    if(this.game.currentGame) {
+      this.gameObject = this.game.currentGame;
+      this.game.currentGame = null;
+    } else {
+      this.router.navigate(['/game/menu']);
+    }
+  }
+
+  resetGame() {
+    this.score = 0;
+    this.timer = this.TIME_LIMIT;
   }
 
   addScore(score) {
@@ -45,11 +62,18 @@ export class ExplorationComponent {
   }
 
   finishGame() {
-    this.finished = true;
-      let dialogRef = this.dialog.open(FinishedGameDialogComponent, {
-        width: '250px',
-        data: { score: this.score }
-      });
+    this.gameObject = null;
+    let dialogRef = this.dialog.open(FinishedGameDialogComponent, {
+      width: '250px',
+      data: { score: this.score }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(this.game.currentGame) {
+        this.gameObject = this.game.currentGame;
+        this.resetGame();
+      }
+    });
   }
 
 }

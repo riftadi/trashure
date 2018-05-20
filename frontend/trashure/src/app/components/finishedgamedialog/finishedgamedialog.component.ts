@@ -16,7 +16,7 @@ export class FinishedGameDialogComponent {
   }
 
   onNoClick(): void {
-    this.router.navigate(['']);
+    this.router.navigate(['/game/menu']);
   }
 
   onYesClick(): void {

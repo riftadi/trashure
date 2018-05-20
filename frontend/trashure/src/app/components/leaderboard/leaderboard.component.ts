@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {HighScore} from "../../models/highscore";
-import {ScoresService} from "../../services/scores.service";
+import {ScoresService} from "../../services/scores/scores.service";
 
 @Component({
   selector: 'app-leaderboard',

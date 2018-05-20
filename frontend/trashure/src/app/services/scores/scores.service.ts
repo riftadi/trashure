@@ -2,8 +2,8 @@ import { HttpClient, HttpEvent } from '@angular/common/http';
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/observable/of';
 import { Injectable } from '@angular/core';
-import {HighScore} from "../models/highscore";
-import {Trophy} from "../models/trophy";
+import {HighScore} from "../../models/highscore";
+import {Trophy} from "../../models/trophy";
 
 @Injectable({
   providedIn: 'root'

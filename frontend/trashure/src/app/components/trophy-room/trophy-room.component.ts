@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ScoresService} from "../../services/scores.service";
+import {ScoresService} from "../../services/scores/scores.service";
 import {Trophy} from "../../models/trophy";
 
 @Component({

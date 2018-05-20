@@ -7,7 +7,7 @@ import { HttpClientModule  } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatGridListModule, MatCardModule, MatMenuModule, MatTableModule, MatDialogModule } from '@angular/material';
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatGridListModule, MatCardModule, MatMenuModule, MatTableModule, MatDialogModule, MatFormFieldModule } from '@angular/material';
 
 import { AppRoutingModule } from './/app-routing.module';
 
@@ -20,7 +20,12 @@ import {StreetviewComponent} from "./components/streetview/streetview.component"
 import {FinishedGameDialogComponent} from './components/finishedgamedialog/finishedgamedialog.component';
 import { TrophyRoomComponent } from './components/trophy-room/trophy-room.component';
 
-import {ScoresService} from "./services/scores.service";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import {ScoresService} from "./services/scores/scores.service";
+import {AuthGuardService} from "./services/auth-guard/auth-guard.service";
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 
 
 @NgModule({
@@ -31,11 +36,15 @@ import {ScoresService} from "./services/scores.service";
     ExplorationComponent,
     StreetviewComponent,
     FinishedGameDialogComponent,
-    TrophyRoomComponent
+    TrophyRoomComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
     LayoutModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDKv-vShjESv1Hwkn3FCqPUj-Ff7BW17ic'
@@ -47,6 +56,7 @@ import {ScoresService} from "./services/scores.service";
     MatSidenavModule,
     MatIconModule,
     MatListModule,
+    MatFormFieldModule,
     MatGridListModule,
     MatCardModule,
     MatMenuModule,
@@ -57,7 +67,8 @@ import {ScoresService} from "./services/scores.service";
     FinishedGameDialogComponent,
   ],
   providers: [
-    ScoresService
+    ScoresService,
+    AuthGuardService
   ],
   bootstrap: [AppComponent]
 })

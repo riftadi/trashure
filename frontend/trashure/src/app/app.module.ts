@@ -18,6 +18,8 @@ import {TrashureMenuComponent} from "./components/trashure-menu/trashure-menu.co
 import {ExplorationComponent} from "./components/exploration/exploration.component";
 import {StreetviewComponent} from "./components/streetview/streetview.component";
 import {FinishedGameDialogComponent} from './components/finishedgamedialog/finishedgamedialog.component';
+import { TrophyRoomComponent } from './components/trophy-room/trophy-room.component';
+
 import {ScoresService} from "./services/scores.service";
 
 
@@ -28,7 +30,8 @@ import {ScoresService} from "./services/scores.service";
     TrashureMenuComponent,
     ExplorationComponent,
     StreetviewComponent,
-    FinishedGameDialogComponent
+    FinishedGameDialogComponent,
+    TrophyRoomComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +56,9 @@ import {ScoresService} from "./services/scores.service";
   entryComponents: [
     FinishedGameDialogComponent,
   ],
-  providers: [ScoresService],
+  providers: [
+    ScoresService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

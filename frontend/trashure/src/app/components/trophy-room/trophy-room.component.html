@@ -1,0 +1,10 @@
+<h2>Trophy room</h2>
+<p>Click on the image to see the location!</p>
+<mat-grid-list cols="2" rowHeight="200px">
+  <mat-grid-tile
+    *ngFor="let trophy of trophies">
+    <div class="tile-content">
+      <a target="_blank" href="https://www.google.com/maps/search/?api=1&query={{trophy.latitude}},{{trophy.longitude}}"><img src="{{trophy.imgUrl}}"></a>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>

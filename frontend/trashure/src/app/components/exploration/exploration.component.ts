@@ -12,7 +12,7 @@ import {Game} from "../../models/game";
 })
 export class ExplorationComponent {
 
-  TIME_LIMIT: number = 4;
+  TIME_LIMIT: number = 300;
   score: number = 0;
   latitude: number;
   longitude: number;

@@ -3,6 +3,8 @@ import { MapsAPILoader } from '@agm/core';
 import { isPlatformBrowser } from '@angular/common';
 import { ScoreTypes } from '../../models/scoretypes'
 import {Game} from "../../models/game";
+import {TrashBin} from "../../models/trashbin";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-streetview',
@@ -20,12 +22,14 @@ export class StreetviewComponent implements OnInit {
   @Input() scrollwheel: boolean = false;
   @Output() scoreEvent: EventEmitter<number> = new EventEmitter<number>();
   @Output() mapsReady = new EventEmitter();
+  apiKey = environment.mapsApiKey;
   google: any;
   map: any;
   bounds: any;
   streetview: any;
   lastPosition: any;
   coins = {};
+  markedBins: TrashBin[] = [];
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object, private mapsAPILoader: MapsAPILoader) { }
 
@@ -64,6 +68,18 @@ export class StreetviewComponent implements OnInit {
       map: this.map,
       bounds: this.bounds
     });
+  }
+
+  saveTrashBin() {
+    let panoId = this.streetview.getPano();
+    let lat = this.streetview.getPosition().lat();
+    let lng = this.streetview.getPosition().lng();
+    let heading = this.streetview.getPov().heading;
+    let pitch = this.streetview.getPov().pitch;
+    let zoom = this.streetview.getPov().zoom;
+    let bin = <TrashBin> {pano: panoId, latitude: lat, longitude: lng, heading: heading, pitch: pitch, fov: 90 - (zoom * 20)};
+    console.log(bin);
+    this.markedBins.push(bin);
   }
 
   initStreetview() {
@@ -113,8 +129,6 @@ export class StreetviewComponent implements OnInit {
         icon: icon,
         title: 'Coin'
       });
-
-      //this.coins[i] = coinMarker;
 
       let context = this;
       coinMarker.addListener('click', function() {

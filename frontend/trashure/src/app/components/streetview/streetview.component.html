@@ -1,2 +1,12 @@
-<div class="streetview-container" #streetviewPano></div>
-<div class="map-container" #streetviewMap></div>
+<div class="streetview-container" #streetviewPano>
+  <div class="map-container" #streetviewMap></div>
+  <button (click)="saveTrashBin()" class="btn btn-primary">Mark trash bin</button>
+</div>
+<mat-grid-list cols="2" rowHeight="400px">
+  <mat-grid-tile
+    *ngFor="let trophy of markedBins">
+    <div class="tile-content">
+      <img src="https://maps.googleapis.com/maps/api/streetview?size=800x400&pano={{trophy.pano}}&fov={{trophy.fov}}&heading={{trophy.heading}}&pitch={{trophy.pitch}}&key={{apiKey}}">
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>

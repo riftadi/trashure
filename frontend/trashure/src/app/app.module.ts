@@ -27,6 +27,7 @@ import {AuthGuardService} from "./services/auth-guard/auth-guard.service";
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import {GameService} from "./services/game/game.service";
+import {environment} from "../environments/environment";
 
 
 @NgModule({
@@ -48,7 +49,7 @@ import {GameService} from "./services/game/game.service";
     ReactiveFormsModule,
     LayoutModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyDKv-vShjESv1Hwkn3FCqPUj-Ff7BW17ic'
+      apiKey: environment.mapsApiKey
     }),
     HttpClientModule,
     MatToolbarModule,

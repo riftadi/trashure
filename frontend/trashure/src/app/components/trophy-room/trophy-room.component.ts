@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {ScoresService} from "../../services/scores/scores.service";
-import {Trophy} from "../../models/trophy";
+import {TrashBin} from "../../models/trashbin";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-trophy-room',
@@ -9,12 +10,15 @@ import {Trophy} from "../../models/trophy";
 })
 export class TrophyRoomComponent implements OnInit {
 
-  trophies: Trophy[];
+  @Input() trophies: TrashBin[];
+  apiKey = environment.mapsApiKey;
 
   constructor(private scores: ScoresService) { }
 
   ngOnInit() {
-    this.scores.getTrophies().subscribe(x => this.trophies = x);
+    if(!this.trophies) {
+      this.scores.getTrophies().subscribe(x => this.trophies = x);
+    }
   }
 
 }

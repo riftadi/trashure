@@ -4,7 +4,9 @@
   <mat-grid-tile
     *ngFor="let trophy of trophies">
     <div class="tile-content">
-      <a target="_blank" href="https://www.google.com/maps/search/?api=1&query={{trophy.latitude}},{{trophy.longitude}}"><img src="{{trophy.imgUrl}}"></a>
+      <a target="_blank" href="https://www.google.com/maps/search/?api=1&query={{trophy.latitude}},{{trophy.longitude}}">
+        <img src="https://maps.googleapis.com/maps/api/streetview?size=400x400&pano={{trophy.pano}}&fov={{trophy.fov}}&heading={{trophy.heading}}&pitch={{trophy.pitch}}&key={{apiKey}}">
+      </a>
     </div>
   </mat-grid-tile>
 </mat-grid-list>

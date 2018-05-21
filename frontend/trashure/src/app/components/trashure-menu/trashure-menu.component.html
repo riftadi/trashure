@@ -1,10 +1,20 @@
-<div class="container">
-  <mat-card>
-    <mat-card-title>Main menu</mat-card-title>
-    <mat-card-content>
-      <button mat-raised-button (click)="startGame()">Start game</button>
-    </mat-card-content>
-  </mat-card>
-  <app-leaderboard></app-leaderboard>
-  <app-trophy-room></app-trophy-room>
+<div class="game-menu">
+  <div class="container">
+    <h1 class="fancy">Trashure hunt</h1>
+    <mat-grid-list cols="2">
+      <mat-grid-tile>
+        <div class="tile-content">
+          <ul class="menu-items fancy">
+            <li (click)="startGame()"><img src="https://melaniepaterson.files.wordpress.com/2015/07/mario3mushroomspin2-1.gif"> Start game</li>
+          </ul>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <div class="tile-content">
+          <app-leaderboard></app-leaderboard>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+    <app-trophy-room></app-trophy-room>
+  </div>
 </div>

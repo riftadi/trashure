@@ -5,3 +5,7 @@
   min-width: 300px;
   overflow: auto;
 }
+
+table {
+  background: rgba(255, 255, 255, 0.5);
+}

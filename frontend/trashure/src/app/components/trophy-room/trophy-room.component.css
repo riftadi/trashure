@@ -1,8 +1,7 @@
-.tile-content img {
-  height: 200px;
-  width: auto;
+h1, h2, p {
+  text-align: center;
 }
 
-h2, p {
-  text-align: center;
+.trophy-container {
+  margin-bottom: 40px;
 }

@@ -1,0 +1,35 @@
+.game-menu {
+  background: url(https://i.imgur.com/SYY2mJz.png);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+h1 {
+  text-align: center;
+  font-size: 60px;
+  color: grey;
+  margin-bottom: 0;
+}
+
+ul {
+  list-style: none;
+  margin-bottom: 20px ;
+}
+
+li {
+  font-size: 30px;
+  color: white;
+  margin-bottom: 20px;
+  background: rgba(72, 72, 72, 0.8);
+  padding: 10px;
+}
+
+li img {
+  height: 24px;
+  vertical-align: baseline;
+}
+
+li:hover {
+  color: red;
+  cursor: pointer;
+}

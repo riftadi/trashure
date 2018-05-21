@@ -1,12 +1,15 @@
-<h2>Trophy room</h2>
-<p>Click on the image to see the location!</p>
-<mat-grid-list cols="2" rowHeight="200px">
-  <mat-grid-tile
-    *ngFor="let trophy of trophies">
-    <div class="tile-content">
-      <a target="_blank" href="https://www.google.com/maps/search/?api=1&query={{trophy.latitude}},{{trophy.longitude}}">
-        <img src="https://maps.googleapis.com/maps/api/streetview?size=400x400&pano={{trophy.pano}}&fov={{trophy.fov}}&heading={{trophy.heading}}&pitch={{trophy.pitch}}&key={{apiKey}}">
-      </a>
-    </div>
-  </mat-grid-tile>
-</mat-grid-list>
+<div class="trophy-container">
+  <h1 class="fancy"> Trophy room</h1>
+  <p>Click on the image to see the location!</p>
+  <mat-grid-list cols="2" rowHeight="400px">
+    <mat-grid-tile
+      *ngFor="let trophy of trophies">
+      <div class="tile-content">
+        <a target="_blank" href="https://www.google.com/maps/search/?api=1&query={{trophy.latitude}},{{trophy.longitude}}">
+          <img src="https://maps.googleapis.com/maps/api/streetview?size=400x400&pano={{trophy.pano}}&fov={{trophy.fov}}&heading={{trophy.heading}}&pitch={{trophy.pitch}}&key={{apiKey}}">
+        </a>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+

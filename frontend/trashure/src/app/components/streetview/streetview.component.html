@@ -2,6 +2,7 @@
   <div class="map-container" #streetviewMap></div>
   <button (click)="saveTrashBin()" class="btn btn-primary">Mark trash bin</button>
 </div>
+<h3 class="text-center fancy">Collected bins ({{markedBins.length}}):</h3>
 <mat-grid-list cols="2" rowHeight="400px">
   <mat-grid-tile
     *ngFor="let trophy of markedBins">

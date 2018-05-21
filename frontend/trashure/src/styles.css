@@ -13,4 +13,9 @@ body {
   font-family: 'Indie Flower', cursive;
 }
 
+.btn-primary {
+  border-radius: 0;
+  background-color: #79c9f9;
+  border-color: #1eabff;
+}
 

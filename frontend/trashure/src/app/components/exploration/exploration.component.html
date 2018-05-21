@@ -4,7 +4,6 @@
     <span class="hud-item fancy">Score: {{ score }}</span>
     <span class="hud-item fancy" *ngIf="!finished">Time left: {{ timer }}</span>
   </div>
-
   <div *ngIf="gameObject">
     <app-streetview
       (scoreEvent)="addScore($event)"

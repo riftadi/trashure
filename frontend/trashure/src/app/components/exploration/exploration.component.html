@@ -1,15 +1,16 @@
-<a [routerLink]="['/game/menu']">
-  <button mat-raised-button>
-    <i class="material-icons">arrow_back</i> Main menu</button>
-</a>
-<h3>Score: {{ score }}</h3>
-<h3 *ngIf="!finished">Time left: {{ timer }}</h3>
-<h3 *ngIf="finished">DONE!</h3>
-<div *ngIf="gameObject">
-  <app-streetview
-    (scoreEvent)="addScore($event)"
-    (mapsReady)="startTimer()"
-    [game]="gameObject"
-  >
-  </app-streetview>
+<div class="exploration-container">
+  <div class="game-hud">
+    <a [routerLink]="['/game/menu']"><i class="material-icons">arrow_back</i> Main menu</a>
+    <span class="hud-item fancy">Score: {{ score }}</span>
+    <span class="hud-item fancy" *ngIf="!finished">Time left: {{ timer }}</span>
+  </div>
+
+  <div *ngIf="gameObject">
+    <app-streetview
+      (scoreEvent)="addScore($event)"
+      (mapsReady)="startTimer()"
+      [game]="gameObject"
+    >
+    </app-streetview>
+  </div>
 </div>

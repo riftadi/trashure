@@ -4,6 +4,27 @@
   background-color: #00b0ff;
 }
 
+.exploration-container {
+  background: url(https://i.imgur.com/qlgoLVk.png);
+}
+
+.game-hud {
+  color: white;
+}
+
+.hud-item {
+  margin: 0 40px;
+  font-size: 26px;
+}
+
+a {
+}
+
+a i {
+  vertical-align: middle;
+  color: white;
+}
+
 h3 {
   display: inline-block;
   margin-left: 20px;

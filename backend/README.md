@@ -30,7 +30,7 @@ You will get the `access_token`, save it for further authentication.
 
 #### Log back in
 
-POST to **/api/registration** with input of:
+POST to **/api/login** with input of:
 
 `"username":"user01","password":"123"`
 

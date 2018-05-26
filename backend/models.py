@@ -3,6 +3,11 @@ from passlib.hash import pbkdf2_sha256 as sha256
 from sqlalchemy import desc
 
 class BaseDBClass:
+    """
+        This class contains shared common methods
+        in the model classes.
+    """
+
     def add_to_db(self):
         db.session.add(self)
         db.session.commit()
@@ -111,10 +116,6 @@ class AreaModel(db.Model, BaseDBClass):
             }
         return {"areas": list(map(lambda x: to_json(x), AreaModel.query.all()))}
 
-    @classmethod
-    def find_by_id(cls, id):
-        return cls.query.filter_by(id = id).first()
-
 
 class GameModel(db.Model, BaseDBClass):
     __tablename__ = "games"
@@ -164,4 +165,23 @@ class TrashbinImageModel(db.Model, BaseDBClass):
     isAnnotated = db.Column(db.Boolean)
     topLeftPixel = db.Column(db.Integer)
     bottomRightPixel = db.Column(db.Integer)
+
+    @classmethod
+    def return_all(cls):
+        def to_json(x):
+            return {
+                "id" : x.id,
+                "trashbinId": x.trashbinId,
+                "userId": x.userId,
+                "pano": x.pano,
+                "longitude": x.longitude,
+                "latitude": x.latitude,
+                "fov": x.fov,
+                "heading": x.heading,
+                "pitch": x.pitch,
+                "isAnnotated": x.isAnnotated,
+                "topLeftPixel": x.topLeftPixel,
+                "bottomRightPixel": x.bottomRightPixel
+            }
+        return {"Trophies": list(map(lambda x: to_json(x), TrashbinImageModel.query.all()))}
 

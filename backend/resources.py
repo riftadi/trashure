@@ -97,14 +97,6 @@ class AllUsers(Resource):
         return UserModel.delete_all()
 
 
-class SecretResource(Resource):
-    @jwt_required
-    def get(self):
-        return {
-            "answer": 42
-        }
-
-
 class GameStart(Resource):
     # @jwt_required
     def get(self):
@@ -152,6 +144,9 @@ class GameEnd(Resource):
 
 
 class Trashbin(Resource):
+    def get(self):
+        return TrashbinImageModel.return_all()
+
     def post(self):
         parser = reqparse.RequestParser()
 
@@ -164,19 +159,19 @@ class Trashbin(Resource):
         
         data = parser.parse_args()
 
-        is_bin_discovered = self.is_bin_already_found(data["longitude"], data["latitude"])
+        is_bin_discovered = self.is_trashbin_already_discovered(data["longitude"], data["latitude"])
 
         # add image to trashbin_images table
         new_image = TrashbinImageModel(
-                # playerId = current_user.id,
-                playerId = 1,
-                isVerified = is_bin_found,
+                # userId = current_user.id,
+                userId = 1,
+                isVerified = is_bin_discovered,
                 pano = data["pano"],
-                longitude = data["pano"],
-                latitude = data["pano"],
-                fov = data["pano"],
-                heading = data["pano"],
-                pitch = data["pano"],
+                longitude = data["longitude"],
+                latitude = data["latitude"],
+                fov = data["fov"],
+                heading = data["heading"],
+                pitch = data["pitch"],
                 isAnnotated = False
             )
 
@@ -192,18 +187,6 @@ class Trashbin(Resource):
 class Highscores(Resource):
     def get(self):
         return UserModel.get_highscore()
-
-
-class Trophies(Resource):
-    def get(self):
-        return {
-            "Trophies" :
-                [
-    {"pano": "qWjshdjjrowodd", "longitude": 52.357571, "latitude": 4.878616, "fov": 90, "heading": 235, "pitch": 10},    
-    {"pano": "qWjshdjjrowodd", "longitude": 52.357571, "latitude": 4.878616, "fov": 90, "heading": 235, "pitch": 10},
-    {"pano": "qWjshdjjrowodd", "longitude": 52.357571, "latitude": 4.878616, "fov": 90, "heading": 235, "pitch": 10}
-                ]
-        }
 
 
 class MapAreas(Resource):

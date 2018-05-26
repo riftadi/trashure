@@ -4,5 +4,5 @@ from models import UserModel, RevokedTokenModel, AreaModel, GameModel
 
 @app.route('/')
 def index():
-    return jsonify({'message': 'Hello, World!'})
+    return jsonify({'message': 'Hello world!'})
 

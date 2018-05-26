@@ -172,8 +172,7 @@ curl -i http://localhost:5000/api/scores/highscores
 # add trashbin images
 curl -i   -H "Authorization: Bearer <token>" -H "Content-Type: application/json" \
   --request POST \
-  --data '{"pano": "qWjshdjjrowodd", "longitude": 52.357571, "latitude": 4.878616, "fov": 90, "heading": 235, "pitch": 10}
-' \
+  --data '{"pano": "qWjshdjjrowodd", "longitude": 52.357571, "latitude": 4.878616, "fov": 90, "heading": 235, "pitch": 10}' \
   http://localhost:5000/api/game/trashbin
 
 # see all trophies

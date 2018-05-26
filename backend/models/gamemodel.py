@@ -1,5 +1,6 @@
 from run import db
 from models.basedb import BaseDBClass
+from models.usermodel import UserModel
 
 class GameModel(db.Model, BaseDBClass):
     __tablename__ = "games"

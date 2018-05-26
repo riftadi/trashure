@@ -1,5 +1,9 @@
 # Backend
 
+## Run Instruction
+
+To run the backend, simply use `python run.py`.
+
 ## API specification
 
 Here is the currently implemented API specification for the backend.

@@ -98,14 +98,13 @@ class AllUsers(Resource):
 
 
 class GameStart(Resource):
-    # @jwt_required
+    @jwt_required
     def get(self):
-        # current_user = UserModel.find_by_username(get_jwt_identity())
+        current_user = UserModel.find_by_username(get_jwt_identity())
         current_area = self.get_game_area()
 
         new_game = GameModel(
-            # userId = current_user.id,
-            userId = 1,
+            userId = current_user.id,
             areaId = current_area.id,
             score = 0,
             isFinished = False
@@ -130,6 +129,7 @@ class GameStart(Resource):
 
 
 class GameEnd(Resource):
+    @jwt_required
     def post(self):
         parser = reqparse.RequestParser()
         parser.add_argument("id", type=int, help = "This field cannot be blank", required = True)
@@ -147,7 +147,9 @@ class Trashbin(Resource):
     def get(self):
         return TrashbinImageModel.return_all()
 
+    @jwt_required
     def post(self):
+        current_user = UserModel.find_by_username(get_jwt_identity())
         parser = reqparse.RequestParser()
 
         parser.add_argument("pano", help = "This field cannot be blank", required = True)
@@ -163,8 +165,7 @@ class Trashbin(Resource):
 
         # add image to trashbin_images table
         new_image = TrashbinImageModel(
-                # userId = current_user.id,
-                userId = 1,
+                userId = current_user.id,
                 isVerified = is_bin_discovered,
                 pano = data["pano"],
                 longitude = data["longitude"],

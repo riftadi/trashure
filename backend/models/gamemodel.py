@@ -12,10 +12,6 @@ class GameModel(db.Model, BaseDBClass):
     score = db.Column(db.BigInteger, nullable = False)
     isFinished = db.Column(db.Boolean)
 
-    def save_to_db(self):
-        db.session.add(self)
-        db.session.commit()
-
     def update_score(self, score):
         self.score = score
         self.isFinished = True

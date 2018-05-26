@@ -10,8 +10,41 @@ Here is the currently implemented API specification for the backend.
 
 ### Authentication
 
-The authentication is implemented using [JWT](https://pythonhosted.org/Flask-JWT/). More details are to be written.
+The authentication is implemented using [JWT](https://pythonhosted.org/Flask-JWT/).
+
+Steps required to use the API endpoints:
+1. Register user
+2. If logging back in, login using the registered user's credential
+3. Use token in header to authenticate yourself
+4. Logout, your token will be revoked
+
 See the example to add users in the section [*Initializing DB using curl commands*](#curlinit).
+
+#### Register user
+
+POST to **/api/registration** with input of:
+
+`"username":"user01","password":"123"`
+
+You will get the `access_token`, save it for further authentication.
+
+#### Log back in
+
+POST to **/api/registration** with input of:
+
+`"username":"user01","password":"123"`
+
+You will get the `access_token`, save it for further authentication.
+
+#### Token usage
+
+Example to start a game:
+
+GET to **/api/game/start** with header of `Authorization: Bearer <access_token>`.
+
+#### Logout
+
+GET to **/api/logout/access** with header of `Authorization: Bearer <access_token>`.
 
 ### Game
 
@@ -105,42 +138,45 @@ You can initialize an empty db using the following curl commands:
 
 ```
 # add areas
-curl -i  --header "Content-Type: application/json" \
+curl -i  -H "Content-Type: application/json" \
   --request POST \
   --data '{"name": "area01", "longitudeStart": 52.357571, "latitudeStart": 4.878616, "longitudeEnd": 52.383144, "latitudeEnd": 4.92445}' \
   http://localhost:5000/api/game/area
-curl -i  --header "Content-Type: application/json" \
+curl -i  -H "Content-Type: application/json" \
   --request POST \
   --data '{"name": "nzline", "longitudeStart": 52.1, "latitudeStart": 4.8, "longitudeEnd": 52.3, "latitudeEnd": 4.9}' \
   http://localhost:5000/api/game/area
 curl -i http://localhost:5000/api/game/area
 
 # add users
-curl -i --header "Content-Type: application/json" \
+curl -i -H "Content-Type: application/json" \
   --request POST \
   --data '{"username":"user01","password":"123"}' \
   http://localhost:5000/api/registration
-curl -i --header "Content-Type: application/json" \
+curl -i -H "Content-Type: application/json" \
   --request POST \
   --data '{"username":"user02","password":"123"}' \
   http://localhost:5000/api/registration
 
 # start game
-curl -i http://127.0.0.1:5000/api/game/start
+curl -i -H "Authorization: Bearer <token>" http://127.0.0.1:5000/api/game/start
 # end game
-curl -i  --header "Content-Type: application/json" \
+curl -i  -H "Authorization: Bearer <token>" -H "Content-Type: application/json" \
   --request POST \
   --data '{"id":1,"score":500}' \
   http://localhost:5000/api/game/end
 
+# see the current leaderboard
 curl -i http://localhost:5000/api/scores/highscores
 
 # add trashbin images
-curl -i  --header "Content-Type: application/json" \
+curl -i   -H "Authorization: Bearer <token>" -H "Content-Type: application/json" \
   --request POST \
   --data '{"pano": "qWjshdjjrowodd", "longitude": 52.357571, "latitude": 4.878616, "fov": 90, "heading": 235, "pitch": 10}
 ' \
   http://localhost:5000/api/game/trashbin
 
+# see all trophies
 curl -i http://localhost:5000/api/scores/trophies
+
 ```

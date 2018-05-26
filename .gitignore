@@ -1,3 +1,6 @@
+# SQlite
+*.db
+
 # Mac stuff
 .DS_Store
 

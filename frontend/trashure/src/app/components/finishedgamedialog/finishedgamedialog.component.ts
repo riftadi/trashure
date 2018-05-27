@@ -10,7 +10,7 @@ import {GameService} from "../../services/game/game.service";
 })
 export class FinishedGameDialogComponent {
 
-  disable = false;
+  disabled = false;
 
   constructor(
     public dialogRef: MatDialogRef<FinishedGameDialogComponent>,
@@ -23,7 +23,7 @@ export class FinishedGameDialogComponent {
   }
 
   onYesClick(): void {
-    this.disable = true;
+    this.disabled = true;
     this.game.getGame().subscribe(x => {
       this.game.startGame(x);
       this.dialogRef.close();

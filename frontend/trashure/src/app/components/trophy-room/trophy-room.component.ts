@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import {ScoresService} from "../../services/scores/scores.service";
 import {TrashBin} from "../../models/trashbin";
 import {environment} from "../../../environments/environment";
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'app-trophy-room',
@@ -17,7 +18,7 @@ export class TrophyRoomComponent implements OnInit {
 
   ngOnInit() {
     if(!this.trophies) {
-      this.scores.getTrophies().subscribe(x => this.trophies = x);
+      this.scores.getTrophies().subscribe(data => this.trophies = data.Trophies.map(x => <TrashBin[]>x));
     }
   }
 

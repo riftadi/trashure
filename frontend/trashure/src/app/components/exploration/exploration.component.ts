@@ -12,7 +12,7 @@ import {Game} from "../../models/game";
 })
 export class ExplorationComponent {
 
-  TIME_LIMIT: number = 300;
+  TIME_LIMIT: number = 20;
   score: number = 0;
   latitude: number;
   longitude: number;
@@ -26,7 +26,7 @@ export class ExplorationComponent {
   ngOnInit() {
     if(this.game.currentGame) {
       this.gameObject = this.game.currentGame;
-      this.game.currentGame = null;
+      console.log(this.gameObject);
     } else {
       this.router.navigate(['/game/menu']);
     }
@@ -62,17 +62,21 @@ export class ExplorationComponent {
   }
 
   finishGame() {
+    let gameId = this.gameObject.id;
     this.gameObject = null;
-    let dialogRef = this.dialog.open(FinishedGameDialogComponent, {
-      width: '250px',
-      data: { score: this.score }
-    });
+    this.game.currentGame = null;
+    this.game.endGame(gameId, this.score).subscribe(x => {
+      let dialogRef = this.dialog.open(FinishedGameDialogComponent, {
+        width: '250px',
+        data: { score: this.score }
+      });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if(this.game.currentGame) {
-        this.gameObject = this.game.currentGame;
-        this.resetGame();
-      }
+      dialogRef.afterClosed().subscribe(result => {
+        if(this.game.currentGame) {
+          this.gameObject = this.game.currentGame;
+          this.resetGame();
+        }
+      });
     });
   }
 

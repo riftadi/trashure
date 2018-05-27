@@ -1,8 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-
-import { HttpClientModule  } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS  } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -28,6 +27,8 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import {GameService} from "./services/game/game.service";
 import {environment} from "../environments/environment";
+import {AuthService} from "./services/auth/auth.service";
+import {RequestInterceptorService} from "./services/request-interceptor/request-interceptor.service";
 
 
 @NgModule({
@@ -71,7 +72,13 @@ import {environment} from "../environments/environment";
   providers: [
     ScoresService,
     AuthGuardService,
-    GameService
+    GameService,
+    AuthService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: RequestInterceptorService,
+      multi: true
+    },
   ],
   bootstrap: [AppComponent]
 })

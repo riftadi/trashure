@@ -5,6 +5,7 @@ import { ScoreTypes } from '../../models/scoretypes'
 import {Game} from "../../models/game";
 import {TrashBin} from "../../models/trashbin";
 import {environment} from "../../../environments/environment";
+import {GameService} from "../../services/game/game.service";
 
 @Component({
   selector: 'app-streetview',
@@ -28,10 +29,11 @@ export class StreetviewComponent implements OnInit {
   bounds: any;
   streetview: any;
   lastPosition: any;
+  hasMoved: boolean = false;
   coins = {};
   markedBins: TrashBin[] = [];
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object, private mapsAPILoader: MapsAPILoader) { }
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private mapsAPILoader: MapsAPILoader, private gameService: GameService) { }
 
   ngOnInit() {
     if(isPlatformBrowser(this.platformId)){
@@ -78,12 +80,13 @@ export class StreetviewComponent implements OnInit {
     let pitch = this.streetview.getPov().pitch;
     let zoom = this.streetview.getPov().zoom;
     let bin = <TrashBin> {pano: panoId, latitude: lat, longitude: lng, heading: heading, pitch: pitch, fov: 90 - (zoom * 20)};
-    console.log(bin);
     this.markedBins.push(bin);
+    this.gameService.markBin(bin).subscribe(x => {
+      if(x.verified) this.scoreEvent.emit(ScoreTypes.TRASHBIN);
+    });
   }
 
   initStreetview() {
-
     this.streetview = new this.google.maps.StreetViewPanorama(
       this.streetviewPano.nativeElement, {
         position: { lat: this.game.area.latitudeStart, lng: this.game.area.longitudeStart },
@@ -104,11 +107,12 @@ export class StreetviewComponent implements OnInit {
       if (context.bounds.contains(context.streetview.getPosition()))
       {
         context.lastPosition = context.streetview.getPosition();
-      }else{
+      }else if(this.hasMoved){
         console.log("Tried to move out of bounds");
         alert("Please stay inside the task region");
         context.streetview.setPosition(context.lastPosition);
       }
+      this.hasMoved = true;
     });
 
   }

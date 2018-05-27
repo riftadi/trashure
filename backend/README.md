@@ -140,11 +140,11 @@ You can initialize an empty db using the following curl commands:
 # add areas
 curl -i  -H "Content-Type: application/json" \
   --request POST \
-  --data '{"name": "area01", "longitudeStart": 52.357571, "latitudeStart": 4.878616, "longitudeEnd": 52.383144, "latitudeEnd": 4.92445}' \
+  --data '{"name": "area01", "latitudeStart": 52.357571, "longitudeStart": 4.878616, "latitudeEnd": 52.383144, "longitudeEnd": 4.92445}' \
   http://localhost:5000/api/game/area
 curl -i  -H "Content-Type: application/json" \
   --request POST \
-  --data '{"name": "nzline", "longitudeStart": 52.1, "latitudeStart": 4.8, "longitudeEnd": 52.3, "latitudeEnd": 4.9}' \
+  --data '{"name": "nzline", "latitudeStart": 52.1, "longitudeStart": 4.8, "latitudeEnd": 52.3, "longitudeEnd": 4.9}' \
   http://localhost:5000/api/game/area
 curl -i http://localhost:5000/api/game/area
 
@@ -172,7 +172,7 @@ curl -i http://localhost:5000/api/scores/highscores
 # add trashbin images
 curl -i   -H "Authorization: Bearer <token>" -H "Content-Type: application/json" \
   --request POST \
-  --data '{"pano": "qWjshdjjrowodd", "longitude": 52.357571, "latitude": 4.878616, "fov": 90, "heading": 235, "pitch": 10}' \
+  --data '{"pano": "qWjshdjjrowodd", "latitude": 52.357571, "longitude": 4.878616, "fov": 90, "heading": 235, "pitch": 10}' \
   http://localhost:5000/api/game/trashbin
 
 # see all trophies

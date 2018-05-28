@@ -6,6 +6,7 @@ import {Game} from "../../models/game";
 import {TrashBin} from "../../models/trashbin";
 import {environment} from "../../../environments/environment";
 import {GameService} from "../../services/game/game.service";
+import {Raycast} from "../../helpers/raycast";
 
 @Component({
   selector: 'app-streetview',
@@ -78,12 +79,17 @@ export class StreetviewComponent implements OnInit {
     let lng = this.streetview.getPosition().lng();
     let heading = this.streetview.getPov().heading;
     let pitch = this.streetview.getPov().pitch;
-    let zoom = this.streetview.getPov().zoom;
-    let bin = <TrashBin> {pano: panoId, latitude: lat, longitude: lng, heading: heading, pitch: pitch, fov: 90 - (zoom * 20)};
+    let fov = (180/Math.pow(2,this.streetview.getPov().zoom));
+    let bin = <TrashBin> {pano: panoId, latitude: lat, longitude: lng, heading: heading, pitch: pitch, fov: fov};
     this.markedBins.push(bin);
     this.gameService.markBin(bin).subscribe(x => {
       if(x.verified) this.scoreEvent.emit(ScoreTypes.TRASHBIN);
     });
+    let width = this.streetviewPano.nativeElement.offsetHeight;
+    let height = this.streetviewPano.nativeElement.offsetWidth;
+    let r = new Raycast(heading, pitch, width/2, height/2, fov, width/height);
+    let l = r.get_latlng(lat,lng);
+    console.log('raycast loc', l);
   }
 
   initStreetview() {

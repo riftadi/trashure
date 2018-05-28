@@ -55,6 +55,5 @@ export class RegisterComponent implements OnInit {
       },
       error => this.error = true
     );
-    this.router.navigate(['/game/menu']);
   }
 }

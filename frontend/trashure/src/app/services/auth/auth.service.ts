@@ -8,12 +8,13 @@ import { Observable } from "rxjs/Observable";
 export class AuthService {
 
   readonly token_endpoint = "/api/login";
+  readonly register_endpoint = "/api/register";
   token : string;
 
   constructor(private http: HttpClient) { }
 
   isTokenEndpoint(route) {
-    return route.startsWith(this.token_endpoint);
+    return route.startsWith(this.token_endpoint) ||  route.startsWith(this.register_endpoint);
   }
 
   getToken() {

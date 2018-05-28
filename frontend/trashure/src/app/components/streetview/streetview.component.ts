@@ -85,9 +85,12 @@ export class StreetviewComponent implements OnInit {
     this.gameService.markBin(bin).subscribe(x => {
       if(x.verified) this.scoreEvent.emit(ScoreTypes.TRASHBIN);
     });
-    let width = this.streetviewPano.nativeElement.offsetHeight;
-    let height = this.streetviewPano.nativeElement.offsetWidth;
+    let height = this.streetviewPano.nativeElement.offsetHeight;
+    let width = this.streetviewPano.nativeElement.offsetWidth;
+    console.log('width', width);
+    console.log('height', height);
     let r = new Raycast(heading, pitch, width/2, height/2, fov, width/height);
+    console.log('r', r);
     let l = r.get_latlng(lat,lng);
     console.log('raycast loc', l);
   }

@@ -30,16 +30,15 @@ export class Raycast {
   get_distance(observer_height)
   {
     var theta = this.get_raycast().pitch;
-    if ( -1 > theta && theta > -89 )
-      return Math.abs(observer_height/Math.tan(theta/180.0*Math.PI));
-    else
-      return null;
+    console.log('theta', theta);
+    return Math.abs(observer_height/Math.tan(theta/180.0*Math.PI));
   }
 
   get_latlng(current_lat, current_lng)
   {
     var heading = ((360 - this.get_raycast().heading) + 90)%360;
     var distance = this.get_distance(3);
+    console.log('distance', distance);
     if (distance == null || distance > 20) return null;
     var x = distance * Math.cos(heading/180.0*Math.PI);
     var y = distance * Math.sin(heading/180.0*Math.PI);

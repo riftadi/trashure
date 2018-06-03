@@ -31,6 +31,14 @@ export class StreetviewComponent implements OnInit {
   streetview: any;
   lastPosition: any;
   hasMoved: boolean = false;
+  drawing: boolean = false;
+  dragging: boolean = false;
+  rectangleWidth = 0;
+  rectangleTop = 0;
+  rectangleHeight = 0;
+  rectangleLeft = 0;
+  startX = 0;
+  startY = 0;
   coins = {};
   markedBins: TrashBin[] = [];
 
@@ -74,6 +82,15 @@ export class StreetviewComponent implements OnInit {
   }
 
   saveTrashBin() {
+    let rectangle = {
+      height: this.rectangleHeight,
+      width: this.rectangleWidth,
+      top: this.rectangleTop,
+      left: this.rectangleLeft,
+      imageWidth: this.streetviewPano.nativeElement.width,
+      imageHeight:  this.streetviewPano.nativeElement.height
+    };
+    console.log('Rectangle', rectangle);
     let panoId = this.streetview.getPano();
     let lat = this.streetview.getPosition().lat();
     let lng = this.streetview.getPosition().lng();
@@ -93,6 +110,7 @@ export class StreetviewComponent implements OnInit {
     console.log('r', r);
     let l = r.get_latlng(lat,lng);
     console.log('raycast loc', l);
+    this.toggleDrawing();
   }
 
   initStreetview() {
@@ -124,6 +142,44 @@ export class StreetviewComponent implements OnInit {
       this.hasMoved = true;
     });
 
+  }
+
+  toggleDrawing() {
+    this.drawing = !this.drawing;
+    if(!this.drawing) {
+      this.resetRectangle();
+    }
+  }
+
+  startDrawing(event) {
+    this.resetRectangle()
+    this.dragging = true;
+    this.rectangleLeft = event.pageX;
+    this.rectangleTop = event.pageY;
+    this.startX = this.rectangleLeft;
+    this.startY = this.rectangleTop;
+  }
+
+  draw(event) {
+    if(this.dragging) {
+      this.rectangleWidth = Math.abs(event.pageX - this.startX);
+      this.rectangleHeight = Math.abs(event.pageY -  this.startY);
+      this.rectangleLeft = (event.pageX - this.startX < 0) ? event.pageX : this.startX;
+      this.rectangleTop = (event.pageY -  this.startY < 0) ? event.pageY : this.startY;
+    }
+  }
+
+  resetRectangle() {
+    this.rectangleWidth = 0;
+    this.rectangleTop = 0;
+    this.rectangleHeight = 0;
+    this.rectangleLeft = 0;
+    this.startX = 0;
+    this.startY = 0;
+  }
+
+  stopDrawing() {
+    this.dragging = false;
   }
 
   addCoins() {

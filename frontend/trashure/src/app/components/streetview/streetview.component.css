@@ -5,9 +5,16 @@
 
 .streetview-container button {
   position: absolute;
-  top: 10px;
   z-index: 2;
+}
+
+.streetview-container button.drawbutton {
+  top: 10px;
   right: 10px;
+}
+.streetview-container button.cancelbutton {
+  top: 10px;
+  right: 150px;
 }
 
 h3 {
@@ -22,4 +29,19 @@ h3 {
   position: absolute;
   top: 0;
   z-index: 2;
+}
+
+.draw-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  cursor: crosshair;
+}
+
+.draw-overlay .rectangle {
+  position: absolute;
+  border: 2px red solid;
 }

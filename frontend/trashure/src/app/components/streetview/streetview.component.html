@@ -1,8 +1,13 @@
 <div class="streetview-container" #streetviewPano>
   <div class="map-container" #streetviewMap></div>
-  <button (click)="saveTrashBin()" class="btn btn-primary">Mark trash bin</button>
+  <div *ngIf="drawing" class="draw-overlay" (mousedown)="startDrawing($event)" (mousemove)="draw($event)" (mouseup)="stopDrawing()">
+    <div class="rectangle" [style.top.px]="rectangleTop" [style.left.px]="rectangleLeft" [style.width.px]="rectangleWidth" [style.height.px]="rectangleHeight"></div>
+  </div>
+  <button (click)="toggleDrawing()" class="btn btn-primary drawbutton">{{!drawing ? "Mark trash bin" : "Cancel"}}</button>
+  <button (click)="saveTrashBin()" *ngIf="drawing" class="btn btn-primary cancelbutton">Save bin</button>
 </div>
 <h3 class="text-center fancy">Collected bins ({{markedBins.length}}):</h3>
+<ng-content></ng-content>
 <mat-grid-list cols="2" rowHeight="400px">
   <mat-grid-tile
     *ngFor="let trophy of markedBins">

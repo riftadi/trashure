@@ -4,5 +4,11 @@ export type TrashBin = {
   latitude: number,
   fov: number,
   heading: number,
-  pitch: number
+  pitch: number,
+  width: number, 
+  height: number, 
+  x: number, 
+  y: number, 
+  svWidth: number,
+  svHeight: number
 }

@@ -97,11 +97,6 @@ export class StreetviewComponent implements OnInit {
     let heading = this.streetview.getPov().heading;
     let pitch = this.streetview.getPov().pitch;
     let fov = (180/Math.pow(2,this.streetview.getPov().zoom));
-    let bin = <TrashBin> {pano: panoId, latitude: lat, longitude: lng, heading: heading, pitch: pitch, fov: fov};
-    this.markedBins.push(bin);
-    this.gameService.markBin(bin).subscribe(x => {
-      if(x.verified) this.scoreEvent.emit(ScoreTypes.TRASHBIN);
-    });
     let height = this.streetviewPano.nativeElement.offsetHeight;
     let width = this.streetviewPano.nativeElement.offsetWidth;
     console.log('width', width);
@@ -110,7 +105,12 @@ export class StreetviewComponent implements OnInit {
     console.log('r', r);
     let l = r.get_latlng(lat,lng);
     console.log('raycast loc', l);
-    this.toggleDrawing();
+    let bin = <TrashBin> {x: this.rectangleLeft, y: this.rectangleTop, width: this.rectangleWidth, height: this.rectangleHeight, pano: panoId, latitude: l.lat, longitude: l.lng, heading: heading, pitch: pitch, fov: fov, svHeight: height, svWidth: width};
+    this.markedBins.push(bin);
+    this.gameService.markBin(bin).subscribe(x => {
+      if(x.verified) this.scoreEvent.emit(ScoreTypes.TRASHBIN);
+    });
+    this.toggleDrawing()
   }
 
   initStreetview() {

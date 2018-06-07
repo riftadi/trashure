@@ -1,0 +1,44 @@
+.rectangle {
+  position: absolute;
+  z-index: 1;
+}
+
+img {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.verification-container {
+  background: url(https://i.imgur.com/qlgoLVk.png);
+  height: 1500px;
+}
+
+.game-hud {
+  color: white;
+  position: absolute;
+  width: 100%;
+}
+
+.hud-item {
+  margin: 0 40px;
+  font-size: 26px;
+}
+
+a {
+}
+
+a i {
+  vertical-align: middle;
+  color: white;
+}
+
+h3 {
+  display: inline-block;
+  margin-left: 20px;
+}
+
+button {
+  display: inline-block;
+}
+

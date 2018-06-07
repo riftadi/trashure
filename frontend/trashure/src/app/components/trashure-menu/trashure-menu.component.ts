@@ -14,8 +14,16 @@ export class TrashureMenuComponent implements OnInit {
     this.playMusic();
   }
 
-  startGame() {
-    this.game.getGame().subscribe(x => this.game.startGame(x));
+  startGame(event) {
+    console.log(event);
+    switch(event.which) {
+      case 1:
+        this.game.getGame(false).subscribe(x => this.game.startGame(x));
+        break;
+      case 3:
+        this.game.getGame(true).subscribe(x => this.game.startGame(x));
+        break;
+    }
   }
 
   playMusic() {

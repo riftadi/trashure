@@ -5,6 +5,7 @@ import {ExplorationComponent} from "./components/exploration/exploration.compone
 import {AuthGuardService} from "./services/auth-guard/auth-guard.service";
 import {LoginComponent} from "./components/login/login.component";
 import {RegisterComponent} from "./components/register/register.component";
+import {VerificationComponent} from "./components/verification/verification.component";
 
 const noAuthRoutes: Routes = [
   { path: '', component: LoginComponent },
@@ -17,7 +18,8 @@ const secureRoutes: Routes = [
     canActivate: [AuthGuardService],
     children: [
       { path: 'menu', component: TrashureMenuComponent },
-      { path: 'exploration', component: ExplorationComponent }
+      { path: 'exploration', component: ExplorationComponent },
+      { path: 'verification', component: VerificationComponent }
     ]
   }
 ];

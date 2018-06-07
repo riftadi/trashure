@@ -24,7 +24,7 @@ export class FinishedGameDialogComponent {
 
   onYesClick(): void {
     this.disabled = true;
-    this.game.getGame().subscribe(x => {
+    this.game.getGame(false).subscribe(x => {
       this.game.startGame(x);
       this.dialogRef.close();
     });

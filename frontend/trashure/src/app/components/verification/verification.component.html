@@ -1,0 +1,13 @@
+<div class="verification-container" *ngIf="gameObject">
+    <div *ngFor="let bin of gameObject.trashbins">
+      <div *ngIf="activeBin === bin" (click)="misClick()">
+        <div (click)="correctClick()" class="rectangle" [style.top.px]="bin.y" [style.left.px]="bin.x" [style.width.px]="bin.width" [style.height.px]="bin.height"></div>
+        <img [style.width.px]="bin.svWidth" [style.height.px]="bin.svHeight" src="https://maps.googleapis.com/maps/api/streetview?size={{bin.svWidth}}x{{bin.svHeight}}&pano={{bin.pano}}&fov={{bin.fov}}&heading={{bin.heading}}&pitch={{bin.pitch}}&key={{apiKey}}">
+      </div>
+    </div>
+  <div class="game-hud" [style.top.px]="activeBin.svHeight">
+    <a [routerLink]="['/game/menu']"><i class="material-icons">arrow_back</i> Main menu</a>
+    <span class="hud-item fancy">Score: {{ score }}</span>
+    <span class="hud-item fancy" *ngIf="!finished">Time left: {{ timer }}</span>
+  </div>
+</div>

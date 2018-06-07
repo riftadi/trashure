@@ -29,6 +29,7 @@ import {GameService} from "./services/game/game.service";
 import {environment} from "../environments/environment";
 import {AuthService} from "./services/auth/auth.service";
 import {RequestInterceptorService} from "./services/request-interceptor/request-interceptor.service";
+import { VerificationComponent } from './components/verification/verification.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import {RequestInterceptorService} from "./services/request-interceptor/request-
     FinishedGameDialogComponent,
     TrophyRoomComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    VerificationComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,5 @@
 import {GameModes} from "./gamemodes";
+import {TrashBin} from "./trashbin";
 export type Game = {
   id: number,
   gamemode: GameModes,
@@ -7,5 +8,6 @@ export type Game = {
     latitudeStart: number,
     longitudeEnd: number,
     latitudeEnd: number
-  }
+  },
+  trashbins: TrashBin[] // In case of verification mode, send a bunch of trashbins to be verified
 }

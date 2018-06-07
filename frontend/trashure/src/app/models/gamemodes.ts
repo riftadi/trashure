@@ -1,3 +1,4 @@
 export enum GameModes {
-  EXPLORATION = 0
+  EXPLORATION = 0,
+  VERIFICATION = 1
 }

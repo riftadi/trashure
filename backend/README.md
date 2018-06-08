@@ -18,7 +18,7 @@ Steps required to use the API endpoints:
 3. Use token in header to authenticate yourself
 4. Logout, your token will be revoked
 
-See the example to add users in the section [*Initializing DB using curl commands*](#curlinit).
+See the example to add users in the section [*Initializing DB*](#dbinit).
 
 #### Register user
 
@@ -132,7 +132,17 @@ trophies :
 ]
 ```
 
-## <a name="curlinit"></a>Initializing DB using curl commands
+## <a name="dbinit"></a>Initializing DB
+
+Before running the game, you should initialize the DB. Pick one of the following approaches.
+
+### Initializing DB using `populate_db.py`
+
+You can initialize an empty db using the provided `populate_db.py` script. Make sure to delete any `app.db` before executing the script.
+
+Alternatively, you can also use curl commands as described in the following subsection.
+
+### Initializing DB using curl commands
 
 You can initialize an empty db using the following curl commands:
 
@@ -179,3 +189,31 @@ curl -i   -H "Authorization: Bearer <token>" -H "Content-Type: application/json"
 curl -i http://localhost:5000/api/scores/trophies
 
 ```
+
+## Evaluation Area
+
+For our experiment, we use the Rembrandt Square of Amsterdam.
+
+```json
+{
+    "area_name" : "Rembrandt Square",
+    "topLeft" : {
+            "lat" : 52.366392,
+            "long" : 4.895436
+        },
+    "bottomRight" : {
+            "lat" : 52.365604,
+            "long" : 4.897701
+        },
+    "n_bins" : 20
+}
+```
+
+To add the Rembrandt Square area using curl:
+```
+curl -i  -H "Content-Type: application/json" \
+  --request POST \
+  --data '{"name": "Rembrandt Square", "latitudeStart": 52.366392, "longitudeStart": 4.895436, "latitudeEnd": 52.365604, "longitudeEnd": 4.897701}' \
+  http://localhost:5000/api/game/area
+```
+

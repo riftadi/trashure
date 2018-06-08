@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import {GameService} from "../../services/game/game.service";
 
 @Component({
@@ -8,10 +8,19 @@ import {GameService} from "../../services/game/game.service";
 })
 export class TrashureMenuComponent implements OnInit {
 
+  startSlideAnimation: boolean = false;
+
   constructor(public game: GameService) { }
 
   ngOnInit() {
     this.playMusic();
+  }
+
+  ngAfterViewInit() {
+    let ctx = this;
+    setTimeout(function() {
+      ctx.startSlideAnimation = true;
+    }, 1000);
   }
 
   startGame(event) {

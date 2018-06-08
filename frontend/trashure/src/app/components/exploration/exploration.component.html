@@ -7,7 +7,7 @@
     >
       <div class="game-hud">
         <a [routerLink]="['/game/menu']"><i class="material-icons">arrow_back</i> Main menu</a>
-        <span class="hud-item fancy">Score: {{ score }}</span>
+        <span class="hud-item fancy">You helped clean {{ score }}kg of garbage today!</span>
         <span class="hud-item fancy" *ngIf="!finished">Time left: {{ timer }}</span>
       </div>
     </app-streetview>

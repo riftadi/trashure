@@ -7,7 +7,7 @@ import {TrashBin} from "../../models/trashbin";
 import {environment} from "../../../environments/environment";
 import {GameService} from "../../services/game/game.service";
 import {Raycast} from "../../helpers/raycast";
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-streetview',
   templateUrl: './streetview.component.html',
@@ -28,9 +28,12 @@ export class StreetviewComponent implements OnInit {
   google: any;
   map: any;
   bounds: any;
+  firstMove = true;
+  firstWarning = true;
   streetview: any;
   lastPosition: any;
-  hasMoved: boolean = false;
+  hasMoved: boolean = true;
+  warned: boolean = false;
   drawing: boolean = false;
   dragging: boolean = false;
   rectangleWidth = 0;
@@ -42,7 +45,7 @@ export class StreetviewComponent implements OnInit {
   coins = {};
   markedBins: TrashBin[] = [];
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object, private mapsAPILoader: MapsAPILoader, private gameService: GameService) { }
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, public toastr: ToastrService, private mapsAPILoader: MapsAPILoader, private gameService: GameService) { }
 
   ngOnInit() {
     if(isPlatformBrowser(this.platformId)){
@@ -59,7 +62,7 @@ export class StreetviewComponent implements OnInit {
   initMap() {
     this.map = new this.google.maps.Map(
       this.streetviewMap.nativeElement, {
-        center: { lat: this.game.area.latitudeStart, lng: this.game.area.longitudeStart },
+        center: { lat: (this.game.area.latitudeStart + this.game.area.latitudeEnd) / 2, lng: (this.game.area.longitudeStart + this.game.area.longitudeEnd) / 2},
         zoom: this.zoom,
         fullscreenControl: false,
         scrollwheel: this.scrollwheel
@@ -116,7 +119,7 @@ export class StreetviewComponent implements OnInit {
   initStreetview() {
     this.streetview = new this.google.maps.StreetViewPanorama(
       this.streetviewPano.nativeElement, {
-        position: { lat: this.game.area.latitudeStart, lng: this.game.area.longitudeStart },
+        position: { lat: (this.game.area.latitudeStart + this.game.area.latitudeEnd) / 2, lng: (this.game.area.longitudeStart + this.game.area.longitudeEnd) / 2 },
         pov: { heading: this.heading, pitch: this.pitch },
         fullscreenControl: false,
         motionTrackingControl: false,
@@ -133,13 +136,15 @@ export class StreetviewComponent implements OnInit {
     this.streetview.addListener('position_changed', function() {
       if (context.bounds.contains(context.streetview.getPosition()))
       {
+        console.log("in bounds");
         context.lastPosition = context.streetview.getPosition();
-      }else if(this.hasMoved){
+        context.firstMove = false;
+      }else if(!context.firstMove) {
         console.log("Tried to move out of bounds");
-        alert("Please stay inside the task region");
+        if ( context.firstWarning ) context.toastr.warning('Please stay inside the task region', 'Warning!');
+        context.firstWarning = false;
         context.streetview.setPosition(context.lastPosition);
       }
-      this.hasMoved = true;
     });
 
   }
@@ -184,8 +189,8 @@ export class StreetviewComponent implements OnInit {
 
   addCoins() {
     var icon = {
-      url: "assets/images/nyannyannyannyan.gif",
-      scaledSize: new this.google.maps.Size(50, 50), // scaled size
+      url: "assets/images/banana.gif",
+      scaledSize: new this.google.maps.Size(100, 100), // scaled size
       origin: new this.google.maps.Point(0,0), // origin
       anchor: new this.google.maps.Point(0, 0) // anchor
     };

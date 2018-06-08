@@ -1,4 +1,4 @@
 export enum ScoreTypes {
-  COIN = 100,
-  TRASHBIN = 500
+  COIN = 0.5,
+  TRASHBIN = 2
 }

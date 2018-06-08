@@ -53,12 +53,12 @@ export class VerificationComponent implements OnInit {
   }
 
   correctClick() {
+    this.addScore();
     if(this.activeIndex === this.gameObject.trashbins.length - 1) {
       this.finishGame();
     } else {
       this.activeIndex++;
       this.activeBin = this.gameObject.trashbins[this.activeIndex];
-      this.addScore();
     }
   }
 

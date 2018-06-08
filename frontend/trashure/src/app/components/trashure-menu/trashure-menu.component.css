@@ -3,6 +3,16 @@
   background-repeat: no-repeat;
   background-position: top;
   background-size: cover;
+  overflow-x: hidden;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.explanation {
+  font-size: 20px;
+  font-family: 'Indie Flower', cursive;
 }
 
 h1 {
@@ -15,6 +25,16 @@ h1 {
 ul {
   list-style: none;
   margin-bottom: 20px ;
+}
+
+.slide {
+  transform: translateX(-200%);
+  -webkit-transform: translateX(-200%);
+}
+
+.slide-right {
+  transform: translateX(200%);
+  -webkit-transform: translateX(200%);
 }
 
 li {
@@ -33,4 +53,17 @@ li img {
 li:hover {
   color: red;
   cursor: pointer;
+}
+
+.slide-in {
+  animation: slide-in 0.5s forwards;
+  -webkit-animation: slide-in 0.5s forwards;
+}
+
+@keyframes slide-in {
+  100% { transform: translateX(0%); }
+}
+
+@-webkit-keyframes slide-in {
+  100% { -webkit-transform: translateX(0%); }
 }

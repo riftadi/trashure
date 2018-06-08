@@ -28,7 +28,7 @@ export class GameService {
         gamemode: 1,
         trashbins: tempBins
       };
-      return Observable.of(tempGame); 
+      return Observable.of(<Game> tempGame);
     }
     return this.http.get('/api/game/start').map(x => <Game>x);
   }

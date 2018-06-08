@@ -1,15 +1,18 @@
 <div class="game-menu">
   <div class="container">
     <h1 class="fancy">Trashure hunt</h1>
+    <div class="explanation">
+      <div class="text-center slide" [class.slide-in]="startSlideAnimation">Help</div> <div [class.slide-in]="startSlideAnimation" class="text-center slide-right">to clean up the streets of Amsterdam!</div>
+    </div>
     <mat-grid-list cols="2">
       <mat-grid-tile>
         <div class="tile-content">
-          <ul class="menu-items fancy">
+          <ul class="menu-items fancy slide" [class.slide-in]="startSlideAnimation">
             <li (mousedown)="startGame($event)"><img src="https://melaniepaterson.files.wordpress.com/2015/07/mario3mushroomspin2-1.gif"> Start game</li>
           </ul>
         </div>
       </mat-grid-tile>
-      <mat-grid-tile>
+      <mat-grid-tile class="slide-right" [class.slide-in]="startSlideAnimation">
         <div class="tile-content">
           <app-leaderboard></app-leaderboard>
         </div>

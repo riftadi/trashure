@@ -31,6 +31,8 @@ import {AuthService} from "./services/auth/auth.service";
 import {RequestInterceptorService} from "./services/request-interceptor/request-interceptor.service";
 import { VerificationComponent } from './components/verification/verification.component';
 
+import { ToastrModule } from 'ngx-toastr';
+
 
 @NgModule({
   declarations: [
@@ -54,6 +56,7 @@ import { VerificationComponent } from './components/verification/verification.co
     AgmCoreModule.forRoot({
       apiKey: environment.mapsApiKey
     }),
+    ToastrModule.forRoot(),
     HttpClientModule,
     MatToolbarModule,
     MatDialogModule,

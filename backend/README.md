@@ -185,10 +185,18 @@ curl -i http://localhost:5000/api/scores/trophies
 For our experiment, we use the Rembrandt Square of Amsterdam.
 
 ```json
-{ "area_name" : "Rembrandt Square",
-"topLeft" : {"lat" : 52.366392, "long" : 4.895436},
-"bottomRight" : {"lat" : 52.365604, "long" : 4.897701},
-n_bins: 20
+{
+    "area_name" : "Rembrandt Square",
+    "topLeft" : {
+            "lat" : 52.366392,
+            "long" : 4.895436
+        },
+    "bottomRight" : {
+            "lat" : 52.365604,
+            "long" : 4.897701
+        },
+    n_bins: 20
+}
 ```
 
 To add the Rembrandt Square area using curl:

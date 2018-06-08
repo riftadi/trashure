@@ -195,7 +195,7 @@ For our experiment, we use the Rembrandt Square of Amsterdam.
             "lat" : 52.365604,
             "long" : 4.897701
         },
-    n_bins: 20
+    "n_bins" : 20
 }
 ```
 

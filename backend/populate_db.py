@@ -1,8 +1,10 @@
 import requests
 import json
 
+hostname_port = "%s:5000"
+
 # add areas
-url = 'http://localhost:5000/api/game/area'
+url = 'http://%s/api/game/area' % hostname_port
 headers = {'Content-type': 'application/json'}
 
 # this one is used for our evalution
@@ -19,7 +21,7 @@ data_json = json.dumps(data)
 response = requests.post(url, data=data_json, headers=headers)
 
 # add users
-url = 'http://localhost:5000/api/registration'
+url = 'http://%s/api/registration' % hostname_port
 headers = {'Content-type': 'application/json'}
 
 data = {"username":"user01","password":"123"}
@@ -35,13 +37,13 @@ response = requests.post(url, data=data_json, headers=headers)
 user02_access_token = response.json()["access_token"]
 
 # start game
-url = 'http://localhost:5000/api/game/start'
+url = 'http://%s/api/game/start' % hostname_port
 headers = {'Authorization': 'Bearer %s' % user01_access_token}
 
 response = requests.get(url, headers=headers)
 
 # end game
-url = 'http://localhost:5000/api/game/end'
+url = 'http://%s/api/game/end' % hostname_port
 headers = {'Content-type': 'application/json', 'Authorization': 'Bearer %s' % user01_access_token}
 
 data = {"id":1,"score":500}
@@ -49,11 +51,11 @@ data_json = json.dumps(data)
 response = requests.post(url, data=data_json, headers=headers)
 
 # see the current leaderboard
-url = 'http://localhost:5000/api/scores/highscores'
+url = 'http://%s/api/scores/highscores' % hostname_port
 response = requests.get(url)
 
 # add trashbin images
-url = 'http://localhost:5000/api/game/trashbin'
+url = 'http://%s/api/game/trashbin' % hostname_port
 headers = {'Content-type': 'application/json', 'Authorization': 'Bearer %s' % user01_access_token}
 
 data = {"pano": "qWjshdjjrowodd", "latitude": 52.357571, "longitude": 4.878616, "fov": 90, "heading": 235, "pitch": 10}
@@ -61,5 +63,5 @@ data_json = json.dumps(data)
 response = requests.post(url, data=data_json, headers=headers)
 
 # see all trophies
-url = 'http://localhost:5000/api/scores/trophies'
+url = 'http://%s/api/scores/trophies' % hostname_port
 response = requests.get(url)

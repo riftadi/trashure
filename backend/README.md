@@ -18,7 +18,7 @@ Steps required to use the API endpoints:
 3. Use token in header to authenticate yourself
 4. Logout, your token will be revoked
 
-See the example to add users in the section [*Initializing DB using curl commands*](#curlinit).
+See the example to add users in the section [*Initializing DB*](#dbinit).
 
 #### Register user
 
@@ -132,7 +132,17 @@ trophies :
 ]
 ```
 
-## <a name="curlinit"></a>Initializing DB using curl commands
+## <a name="dbinit"></a>Initializing DB
+
+Before running the game, you should initialize the DB. Pick one of the following approaches.
+
+### Initializing DB using `populate_db.py`
+
+You can initialize an empty db using the provided `populate_db.py` script. Make sure to delete any `app.db` before executing the script.
+
+Alternatively, you can also use curl commands as described in the following subsection.
+
+### Initializing DB using curl commands
 
 You can initialize an empty db using the following curl commands:
 

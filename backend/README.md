@@ -179,3 +179,23 @@ curl -i   -H "Authorization: Bearer <token>" -H "Content-Type: application/json"
 curl -i http://localhost:5000/api/scores/trophies
 
 ```
+
+## Evaluation Area
+
+For our experiment, we use the Rembrandt Square of Amsterdam.
+
+```json
+{ "area_name" : "Rembrandt Square",
+"topLeft" : {"lat" : 52.366392, "long" : 4.895436},
+"bottomRight" : {"lat" : 52.365604, "long" : 4.897701},
+n_bins: 20
+```
+
+To add the Rembrandt Square area using curl:
+```
+curl -i  -H "Content-Type: application/json" \
+  --request POST \
+  --data '{"name": "Rembrandt Square", "latitudeStart": 52.366392, "longitudeStart": 4.895436, "latitudeEnd": 52.365604, "longitudeEnd": 4.897701}' \
+  http://localhost:5000/api/game/area
+```
+

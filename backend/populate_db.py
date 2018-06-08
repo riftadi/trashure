@@ -1,7 +1,7 @@
 import requests
 import json
 
-hostname_port = "%s:5000"
+hostname_port = "54.171.75.154:5112"
 
 # add areas
 url = 'http://%s/api/game/area' % hostname_port

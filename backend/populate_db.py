@@ -1,8 +1,8 @@
 import requests
 import json
 
-# hostname_port = "54.171.75.154:5112"
-hostname_port = "localhost:5000"
+hostname_port = "54.171.75.154:5112"
+#hostname_port = "localhost:5000"
 
 # add areas
 print("Adding areas..")
@@ -42,7 +42,7 @@ print("Adding users..")
 url = 'http://%s/api/registration' % hostname_port
 headers = {'Content-type': 'application/json'}
 
-data = {"username":"user01","password":"123"}
+data = {"username":"trashmonster","password":"123"}
 data_json = json.dumps(data)
 response = requests.post(url, data=data_json, headers=headers)
 print(response.json())
@@ -50,7 +50,7 @@ print(response.json())
 user01_access_token = response.json()["access_token"]
 print("user1 access token : %s" % user01_access_token)
 
-data = {"username":"user02","password":"123"}
+data = {"username":"the_janitor","password":"123"}
 data_json = json.dumps(data)
 response = requests.post(url, data=data_json, headers=headers)
 print(response.json())
@@ -71,7 +71,7 @@ print("Ending a game..")
 url = 'http://%s/api/game/end' % hostname_port
 headers = {'Content-type': 'application/json', 'Authorization': 'Bearer %s' % user01_access_token}
 
-data = {"id":1,"score":500}
+data = {"id":1,"score":20}
 data_json = json.dumps(data)
 response = requests.post(url, data=data_json, headers=headers)
 print(response.json())

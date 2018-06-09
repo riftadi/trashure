@@ -1,5 +1,5 @@
 <h2 mat-dialog-title>Game over</h2>
-<mat-dialog-content>Your score was {{ data.score }}, play another game?</mat-dialog-content>
+<mat-dialog-content>Your collected {{ data.score }}kg trash, play another game?</mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button mat-dialog-close (click)="onNoClick()" [disabled]="disabled">No</button>
   <button mat-button (click)="onYesClick()" [disabled]="disabled">Yes</button>

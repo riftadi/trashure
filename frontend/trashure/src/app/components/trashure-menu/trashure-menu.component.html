@@ -1,8 +1,8 @@
 <div class="game-menu">
   <div class="container">
-    <h1 class="fancy">Trashure hunt</h1>
+    <h1 class="fancy top-slide" [class.slide-top]="startSlideAnimation">Trashure hunt</h1>
     <div class="explanation">
-      <div class="text-center slide" [class.slide-in]="startSlideAnimation">Help</div> <div [class.slide-in]="startSlideAnimation" class="text-center slide-right">to clean up the streets of Amsterdam!</div>
+      <div class="big-text text-center slide" [class.slide-in]="startSlideAnimation">Help cleaning up Amsterdam!</div> <div [class.slide-in]="startSlideAnimation" class="text-center slide-right">One trash bin at a time</div>
     </div>
     <mat-grid-list cols="2">
       <mat-grid-tile>

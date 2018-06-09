@@ -15,7 +15,7 @@ import {ScoreTypes} from "../../models/scoretypes";
 })
 export class VerificationComponent implements OnInit {
 
-  TIME_LIMIT: number = 500;
+  TIME_LIMIT: number = 60;
   score: number = 0;
   timer: number = this.TIME_LIMIT;
   finished: boolean = false;

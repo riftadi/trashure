@@ -18,7 +18,7 @@ export class StreetviewComponent implements OnInit {
   @ViewChild('streetviewMap') streetviewMap: any;
   @ViewChild('streetviewPano') streetviewPano: any;
   @Input() game: Game;
-  @Input() zoom: number = 14;
+  @Input() zoom: number = 18;
   @Input() heading: number = 34;
   @Input() pitch: number = 10;
   @Input() scrollwheel: boolean = false;

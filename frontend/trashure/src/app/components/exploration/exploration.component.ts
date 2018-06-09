@@ -1,9 +1,12 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef, ViewChild } from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {FinishedGameDialogComponent} from "../finishedgamedialog/finishedgamedialog.component";
 import {GameService} from "../../services/game/game.service";
 import {Router} from "@angular/router";
 import {Game} from "../../models/game";
+
+declare var jquery:any;
+declare var $ :any;
 
 @Component({
   selector: 'app-exploration',
@@ -12,13 +15,17 @@ import {Game} from "../../models/game";
 })
 export class ExplorationComponent {
 
-  TIME_LIMIT: number = 500;
+  @ViewChild('tutorialModal') tutorialModal: any;
+  TIME_LIMIT: number = 60;
   score: number = 0;
   latitude: number;
   longitude: number;
   timer: number = this.TIME_LIMIT;
   finished: boolean = false;
   gameObject: Game;
+  tutorialIndex = 0;
+  hasNextSlide = true;
+  tutorialFinished = false;
 
   constructor(private cdRef:ChangeDetectorRef, public game: GameService, public dialog: MatDialog, private router: Router) {
   }
@@ -27,9 +34,22 @@ export class ExplorationComponent {
     if(this.game.currentGame) {
       this.gameObject = this.game.currentGame;
       console.log(this.gameObject);
+      $('#tutorialModal').modal();
     } else {
       this.router.navigate(['/game/menu']);
     }
+  }
+
+  nextTutorialSlide() {
+    this.tutorialIndex++;
+    if(this.tutorialIndex === 3) {
+      this.hasNextSlide = false;
+    }
+  }
+
+  closeTutorial() {
+    this.tutorialFinished = true;
+    this.startTimer();
   }
 
   resetGame() {
@@ -52,13 +72,15 @@ export class ExplorationComponent {
   }
 
   startTimer(){
-    var interval = setInterval(() => {
-      this.timer--;
-      if(this.timer === 0 ){
-        clearInterval(interval);
-        this.finishGame();
-      };
-    }, 1000);
+    if(this.tutorialFinished) {
+      var interval = setInterval(() => {
+        this.timer--;
+        if(this.timer === 0 ){
+          clearInterval(interval);
+          this.finishGame();
+        };
+      }, 1000);
+    }
   }
 
   finishGame() {

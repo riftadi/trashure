@@ -13,3 +13,30 @@
     </app-streetview>
   </div>
 </div>
+<div #tutorialModal id="tutorialModal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Tutorial</h5>
+      </div>
+      <div class="modal-body">
+        <p *ngIf="tutorialIndex === 0">Welcome to trashure hunt, the game where you will help to clean up the city of Amsterdam! You will be shown a tutorial guide before you can start the adventure.</p>
+        <p *ngIf="tutorialIndex === 1">The goal of the game is to find as much trash bins as possible in your designated area within the time limit. In the top left you will find a map where you can see the area to explore. Make sure to stay inside the red bounds!
+          <img src="assets/images/bounds.PNG">
+        </p>
+        <p *ngIf="tutorialIndex === 2">Whenever you find a trash bin, click "Mark bin" in the top right and draw a rectangle over the bin. Click "Save bin" and it will be processed.
+          <img src="assets/images/markbin.PNG">
+        </p>
+        <p *ngIf="tutorialIndex === 3">
+          You will also find trash all over the map, collect them by clicking on them and score extra points!
+          <img src="assets/images/trash.PNG">
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="nextTutorialSlide()" *ngIf="hasNextSlide">Next</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" *ngIf="!hasNextSlide" (click)="closeTutorial()">Get started</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeTutorial()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

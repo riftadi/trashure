@@ -10,6 +10,11 @@
   text-align: center;
 }
 
+.big-text {
+  font-size: 26px;
+  color: brown;
+}
+
 .explanation {
   font-size: 20px;
   font-family: 'Indie Flower', cursive;
@@ -25,6 +30,11 @@ h1 {
 ul {
   list-style: none;
   margin-bottom: 20px ;
+}
+
+.top-slide {
+  transform: translateY(-200%);
+  -webkit-transform: translateY(-200%);
 }
 
 .slide {
@@ -55,6 +65,11 @@ li:hover {
   cursor: pointer;
 }
 
+.slide-top {
+  animation: slide-top 0.5s forwards;
+  -webkit-animation: slide-top 0.5s forwards;
+}
+
 .slide-in {
   animation: slide-in 0.5s forwards;
   -webkit-animation: slide-in 0.5s forwards;
@@ -66,4 +81,12 @@ li:hover {
 
 @-webkit-keyframes slide-in {
   100% { -webkit-transform: translateX(0%); }
+}
+
+@keyframes slide-top {
+  100% { transform: translateY(0%); }
+}
+
+@-webkit-keyframes slide-top {
+  100% { -webkit-transform: translateY(0%); }
 }

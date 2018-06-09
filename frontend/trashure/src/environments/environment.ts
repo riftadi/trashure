@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   mapsApiKey: 'AIzaSyDKv-vShjESv1Hwkn3FCqPUj-Ff7BW17ic',
-  baseUrl: 'http://localhost:5000'
+  baseUrl: 'http://54.171.75.154:5112'
 };
 
 /*

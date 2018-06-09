@@ -27,7 +27,7 @@ class AreaModel(db.Model, BaseDBClass):
                 "latitudeEnd" : x.latitudeEnd,
                 "startingPointLongitude" : x.startingPointLongitude,
                 "startingPointLatitude" : x.startingPointLatitude,
-                "createdOn" : x.createdOn,
-                "updatedOn" : x.updatedOn
+                "createdOn" : str(x.createdOn),
+                "updatedOn" : str(x.updatedOn)
             }
         return {"areas": list(map(lambda x: to_json(x), AreaModel.query.all()))}

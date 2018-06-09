@@ -35,8 +35,8 @@ class TrashbinImageModel(db.Model, BaseDBClass):
             "isAnnotated": x.isAnnotated,
             "topLeftPixel": x.topLeftPixel,
             "bottomRightPixel": x.bottomRightPixel,
-            "createdOn" : x.createdOn,
-            "updatedOn" : x.updatedOn
+            "createdOn" : str(x.createdOn),
+            "updatedOn" : str(x.updatedOn)
         }
 
     @classmethod

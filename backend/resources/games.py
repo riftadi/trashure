@@ -27,8 +27,8 @@ class GameStart(Resource):
                 "latitudeEnd": current_area.latitudeEnd,
                 "startingPointLongitude": current_area.startingPointLongitude,
                 "startingPointLatitude": current_area.startingPointLatitude,
-                "createdOn" : x.createdOn,
-                "updatedOn" : x.updatedOn
+                "createdOn" : str(current_area.createdOn),
+                "updatedOn" : str(current_area.updatedOn)
             }
         }
 

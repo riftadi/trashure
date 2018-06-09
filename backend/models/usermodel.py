@@ -48,8 +48,8 @@ class UserModel(db.Model, BaseDBClass):
                 "username": x.username,
                 "password": x.password,
                 "score" : x.user,
-                "createdOn" : x.createdOn,
-                "updatedOn" : x.updatedOn
+                "createdOn" : str(x.createdOn),
+                "updatedOn" : str(x.updatedOn)
             }
         return {"users": list(map(lambda x: to_json(x), UserModel.query.all()))}
 

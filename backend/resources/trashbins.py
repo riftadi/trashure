@@ -3,8 +3,10 @@ from models import UserModel, TrashbinImageModel
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
 class Trashbin(Resource):
+    @jwt_required
     def get(self):
-        return TrashbinImageModel.return_all()
+        current_user = UserModel.find_by_username(get_jwt_identity())
+        return TrashbinImageModel.return_all_from_userid(current_user.id)
 
     @jwt_required
     def post(self):

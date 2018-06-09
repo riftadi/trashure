@@ -24,12 +24,15 @@ class GameStart(Resource):
                 "longitudeStart": current_area.longitudeStart,
                 "latitudeStart": current_area.latitudeStart,
                 "longitudeEnd": current_area.longitudeEnd,
-                "latitudeEnd": current_area.latitudeEnd
+                "latitudeEnd": current_area.latitudeEnd,
+                "startingPointLongitude": current_area.startingPointLongitude,
+                "startingPointLatitude": current_area.startingPointLatitude,
+                "createdOn" : x.createdOn,
+                "updatedOn" : x.updatedOn
             }
         }
 
     def get_game_area(self):
-        # temporary, we only have one area anyway
         return AreaModel.find_by_id(1)
 
 

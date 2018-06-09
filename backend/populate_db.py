@@ -1,22 +1,35 @@
 import requests
 import json
 
-hostname_port = "54.171.75.154:5112"
+# hostname_port = "54.171.75.154:5112"
+hostname_port = "localhost:5000"
 
 # add areas
 url = 'http://%s/api/game/area' % hostname_port
 headers = {'Content-type': 'application/json'}
 
 # this one is used for our evalution
-data = {"name": "Rembrandt Square", "latitudeStart": 52.366392, "longitudeStart": 4.895436, "latitudeEnd": 52.365604, "longitudeEnd": 4.897701}
+data = {"name": "Rembrandt Square",
+            "latitudeStart": 52.366392, "longitudeStart": 4.895436,
+            "latitudeEnd": 52.365604, "longitudeEnd": 4.897701, 
+            "startingPointLatitude": 52.3661846 , "startingPointLongitude": 4.8964819
+        }
 data_json = json.dumps(data)
 response = requests.post(url, data=data_json, headers=headers)
 
-data = {"name": "area01", "latitudeStart": 52.357571, "longitudeStart": 4.878616, "latitudeEnd": 52.383144, "longitudeEnd": 4.92445}
+data = {"name": "area01",
+            "latitudeStart": 52.357571, "longitudeStart": 4.878616,
+            "latitudeEnd": 52.383144, "longitudeEnd": 4.92445,
+            "startingPointLatitude": 52.357571, "startingPointLongitude": 4.878616
+        }
 data_json = json.dumps(data)
 response = requests.post(url, data=data_json, headers=headers)
 
-data = {"name": "nzline", "latitudeStart": 52.1, "longitudeStart": 4.8, "latitudeEnd": 52.3, "longitudeEnd": 4.9}
+data = {"name": "nzline",
+            "latitudeStart": 52.1, "longitudeStart": 4.8,
+            "latitudeEnd": 52.3, "longitudeEnd": 4.9,
+            "startingPointLatitude": 52.1, "startingPointLongitude": 4.8
+        }
 data_json = json.dumps(data)
 response = requests.post(url, data=data_json, headers=headers)
 
@@ -29,12 +42,14 @@ data_json = json.dumps(data)
 response = requests.post(url, data=data_json, headers=headers)
 
 user01_access_token = response.json()["access_token"]
+print("user1 access token : %s" % user01_access_token)
 
 data = {"username":"user02","password":"123"}
 data_json = json.dumps(data)
 response = requests.post(url, data=data_json, headers=headers)
 
 user02_access_token = response.json()["access_token"]
+print("user2 access token : %s" % user02_access_token)
 
 # start game
 url = 'http://%s/api/game/start' % hostname_port
@@ -60,8 +75,9 @@ headers = {'Content-type': 'application/json', 'Authorization': 'Bearer %s' % us
 
 data = {"pano": "qWjshdjjrowodd", "latitude": 52.357571, "longitude": 4.878616, "fov": 90, "heading": 235, "pitch": 10}
 data_json = json.dumps(data)
-response = requests.post(url, data=data_json, headers=headers)
+#response = requests.post(url, data=data_json, headers=headers)
 
 # see all trophies
 url = 'http://%s/api/scores/trophies' % hostname_port
+headers = {'Authorization': 'Bearer %s' % user01_access_token}
 response = requests.get(url)

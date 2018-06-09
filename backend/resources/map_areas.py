@@ -13,6 +13,8 @@ class MapAreas(Resource):
         parser.add_argument("latitudeStart", type=float, help = "This field cannot be blank", required = True)
         parser.add_argument("longitudeEnd", type=float, help = "This field cannot be blank", required = True)
         parser.add_argument("latitudeEnd", type=float, help = "This field cannot be blank", required = True)
+        parser.add_argument("startingPointLongitude", type=float, help = "This field cannot be blank", required = True)
+        parser.add_argument("startingPointLatitude", type=float, help = "This field cannot be blank", required = True)
 
         data = parser.parse_args()
 
@@ -21,7 +23,9 @@ class MapAreas(Resource):
                 longitudeStart = data["longitudeStart"],
                 latitudeStart = data["latitudeStart"],
                 longitudeEnd = data["longitudeEnd"],
-                latitudeEnd = data["latitudeEnd"]
+                latitudeEnd = data["latitudeEnd"],
+                startingPointLongitude = data["startingPointLongitude"],
+                startingPointLatitude = data["startingPointLatitude"]
             )
         new_area.add_to_db()
 

@@ -7,6 +7,7 @@ class TrashbinImageModel(db.Model, BaseDBClass):
     trashbinId = db.Column(db.Integer, db.ForeignKey("trashbins.id"))
     userId = db.Column(db.Integer, db.ForeignKey("users.id"),
         nullable=False)
+    gameId = db.Column(db.Integer, db.ForeignKey("games.id"))
     isVerified = db.Column(db.Boolean)
     pano = db.Column(db.String(32))
     longitude = db.Column(db.Float)
@@ -28,6 +29,7 @@ class TrashbinImageModel(db.Model, BaseDBClass):
                 "id" : x.id,
                 "trashbinId": x.trashbinId,
                 "userId": x.userId,
+                "gameId": x.gameId,
                 "pano": x.pano,
                 "longitude": x.longitude,
                 "latitude": x.latitude,

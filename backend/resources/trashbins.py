@@ -19,14 +19,21 @@ class Trashbin(Resource):
         parser.add_argument("fov", type=int, help = "This field cannot be blank", required = True)
         parser.add_argument("heading", type=int, help = "This field cannot be blank", required = True)
         parser.add_argument("pitch", type=int, help = "This field cannot be blank", required = True)
+        parser.add_argument("gameId")
         
         data = parser.parse_args()
+
+        try:
+            game_id = data["gameId"]
+        except:
+            game_id = None
 
         is_bin_discovered = self.is_trashbin_already_discovered(data["longitude"], data["latitude"])
 
         # add image to trashbin_images table
         new_image = TrashbinImageModel(
                 userId = current_user.id,
+                gameId = game_id,
                 isVerified = is_bin_discovered,
                 pano = data["pano"],
                 longitude = data["longitude"],

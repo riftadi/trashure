@@ -10,6 +10,9 @@ class UserModel(db.Model, BaseDBClass):
     username = db.Column(db.String(120), unique = True, nullable = False)
     password = db.Column(db.String(120), nullable = False)
     score = db.Column(db.BigInteger, nullable = False)
+    createdOn = db.Column(db.DateTime, server_default=db.func.now())
+    updatedOn = db.Column(db.DateTime, server_default=db.func.now(),
+        server_onupdate=db.func.now())
     
     def add_score(self, score):
         self.score += score
@@ -44,7 +47,9 @@ class UserModel(db.Model, BaseDBClass):
             return {
                 "username": x.username,
                 "password": x.password,
-                "score" : x.user
+                "score" : x.user,
+                "createdOn" : str(x.createdOn),
+                "updatedOn" : str(x.updatedOn)
             }
         return {"users": list(map(lambda x: to_json(x), UserModel.query.all()))}
 

@@ -13,11 +13,11 @@ cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SECRET_KEY'] = 'some-secret-string'
+app.config['SECRET_KEY'] = 'nZNzIXejCcaunKTbgmtffboST9SrGhqF'
 
 db = SQLAlchemy(app)
 
-app.config['JWT_SECRET_KEY'] = 'jwt-secret-string'
+app.config['JWT_SECRET_KEY'] = 'iSCOrZ86aMP04xWK2ehCNiLFIYC9tgw1'
 jwt = JWTManager(app)
 
 app.config['JWT_BLACKLIST_ENABLED'] = True
@@ -48,4 +48,5 @@ api.add_resource(MapAreas, '/api/game/area')
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
+    #port = int(os.environ.get("PORT", 5112))
     app.run(host='0.0.0.0', port=port, debug=True)

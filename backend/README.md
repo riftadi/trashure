@@ -54,7 +54,7 @@ Endpoints for starting/ending a game.
 This endpoint will be used to start a new game. For now it will probably be enough to return an area to explore bins in.
 
 Output
-```
+```json
 {
     id: 0, // Unique identifier for the game
     gamemode: 0 // For now we only have the exploration mode so this will always be the same
@@ -120,7 +120,7 @@ highscores :
 
 #### GET /api/scores/trophies
 
-Endpoint for the trashbin trophies.
+Endpoint for the trashbin trophies. Don't forget the `access_token` to identify the user.
 
 Output 
 ```
@@ -186,7 +186,7 @@ curl -i   -H "Authorization: Bearer <token>" -H "Content-Type: application/json"
   http://localhost:5000/api/game/trashbin
 
 # see all trophies
-curl -i http://localhost:5000/api/scores/trophies
+curl -i -H "Authorization: Bearer <token>" http://localhost:5000/api/scores/trophies
 
 ```
 

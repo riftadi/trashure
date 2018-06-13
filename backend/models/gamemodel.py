@@ -11,6 +11,9 @@ class GameModel(db.Model, BaseDBClass):
         nullable=False)
     score = db.Column(db.BigInteger, nullable = False)
     isFinished = db.Column(db.Boolean)
+    createdOn = db.Column(db.DateTime, server_default=db.func.now())
+    updatedOn = db.Column(db.DateTime, server_default=db.func.now(),
+        server_onupdate=db.func.now())
 
     def update_score(self, score):
         self.score = score

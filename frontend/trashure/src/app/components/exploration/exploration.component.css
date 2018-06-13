@@ -11,6 +11,17 @@
 .game-hud {
   color: white;
   background: rgba(0,0,0,0.2);
+  overflow: hidden;
+}
+
+.timer {
+  background: red;
+  border-radius: 5px;
+  padding: 0px 5px;
+}
+
+.game-hud button {
+  margin: 5px 10px;
 }
 
 .modal-content {

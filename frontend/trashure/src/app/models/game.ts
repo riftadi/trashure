@@ -7,7 +7,9 @@ export type Game = {
     longitudeStart: number,
     latitudeStart: number,
     longitudeEnd: number,
-    latitudeEnd: number
+    latitudeEnd: number,
+    startingPointLatitude: number,
+    startingPointLongitude: number
   },
   trashbins: TrashBin[] // In case of verification mode, send a bunch of trashbins to be verified
 }

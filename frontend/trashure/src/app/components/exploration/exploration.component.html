@@ -6,9 +6,10 @@
       [game]="gameObject"
     >
       <div class="game-hud">
-        <a [routerLink]="['/game/menu']"><i class="material-icons">arrow_back</i> Main menu</a>
+        <a [routerLink]="['/game/menu']" (click)="exitGame()"><i class="material-icons">arrow_back</i> Main menu</a>
+        <button type="button" class="btn btn-primary" (click)="showTutorial()">Show tutorial</button>
+        <span class="hud-item fancy timer" *ngIf="!finished">Time left: {{ timer }}</span>
         <span class="hud-item fancy">You helped clean {{ score }}kg of garbage today!</span>
-        <span class="hud-item fancy" *ngIf="!finished">Time left: {{ timer }}</span>
       </div>
     </app-streetview>
   </div>
@@ -21,7 +22,7 @@
       </div>
       <div class="modal-body">
         <p *ngIf="tutorialIndex === 0">Welcome to trashure hunt, the game where you will help to clean up the city of Amsterdam! You will be shown a tutorial guide before you can start the adventure.</p>
-        <p *ngIf="tutorialIndex === 1">The goal of the game is to find as much trash bins as possible in your designated area within the time limit. In the top left you will find a map where you can see the area to explore. Make sure to stay inside the red bounds!
+        <p *ngIf="tutorialIndex === 1">The goal of the game is to find as much trash bins as possible in your designated area within 60 seconds. In the top left you will find a map where you can see the area to explore. Make sure to stay inside the red bounds!
           <img src="assets/images/bounds.PNG">
         </p>
         <p *ngIf="tutorialIndex === 2">Whenever you find a trash bin, click "Mark bin" in the top right and draw a rectangle over the bin. Click "Save bin" and it will be processed.

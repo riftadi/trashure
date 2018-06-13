@@ -62,7 +62,7 @@ export class StreetviewComponent implements OnInit {
   initMap() {
     this.map = new this.google.maps.Map(
       this.streetviewMap.nativeElement, {
-        center: { lat: (this.game.area.latitudeStart + this.game.area.latitudeEnd) / 2, lng: (this.game.area.longitudeStart + this.game.area.longitudeEnd) / 2},
+        center: { lat: this.game.area.startingPointLatitude, lng: this.game.area.startingPointLongitude},
         zoom: this.zoom,
         fullscreenControl: false,
         scrollwheel: this.scrollwheel
@@ -82,6 +82,10 @@ export class StreetviewComponent implements OnInit {
       map: this.map,
       bounds: this.bounds
     });
+  }
+
+  isBetween(value, value1, value2) {
+    return value >= value1 && value <= value2;
   }
 
   saveTrashBin() {
@@ -108,7 +112,7 @@ export class StreetviewComponent implements OnInit {
     console.log('r', r);
     let l = r.get_latlng(lat,lng);
     console.log('raycast loc', l);
-    let bin = <TrashBin> {x: this.rectangleLeft, y: this.rectangleTop, width: this.rectangleWidth, height: this.rectangleHeight, pano: panoId, latitude: l.lat, longitude: l.lng, heading: heading, pitch: pitch, fov: fov, svHeight: height, svWidth: width};
+    let bin = <TrashBin> {gameId: this.game.id, x: this.rectangleLeft, y: this.rectangleTop, width: this.rectangleWidth, height: this.rectangleHeight, pano: panoId, latitude: l.lat, longitude: l.lng, heading: heading, pitch: pitch, fov: fov, svHeight: height, svWidth: width};
     this.markedBins.push(bin);
     this.gameService.markBin(bin).subscribe(x => {
       if(x.verified) this.scoreEvent.emit(ScoreTypes.TRASHBIN);
@@ -119,7 +123,7 @@ export class StreetviewComponent implements OnInit {
   initStreetview() {
     this.streetview = new this.google.maps.StreetViewPanorama(
       this.streetviewPano.nativeElement, {
-        position: { lat: (this.game.area.latitudeStart + this.game.area.latitudeEnd) / 2, lng: (this.game.area.longitudeStart + this.game.area.longitudeEnd) / 2 },
+        position: { lat: this.game.area.startingPointLatitude, lng: this.game.area.startingPointLongitude },
         pov: { heading: this.heading, pitch: this.pitch },
         fullscreenControl: false,
         motionTrackingControl: false,
@@ -134,7 +138,12 @@ export class StreetviewComponent implements OnInit {
     let context = this;
 
     this.streetview.addListener('position_changed', function() {
-      if (context.bounds.contains(context.streetview.getPosition()))
+      console.log('moved');
+      console.log('bounds', context.bounds);
+      console.log('pos', context.streetview.getPosition().lat(), context.streetview.getPosition().lng());
+      let curLat = context.streetview.getPosition().lat();
+      let curLng = context.streetview.getPosition().lng();
+      if (context.isBetween(curLat, context.game.area.latitudeEnd, context.game.area.latitudeStart) && context.isBetween(curLng, context.game.area.longitudeStart, context.game.area.longitudeEnd))
       {
         console.log("in bounds");
         context.lastPosition = context.streetview.getPosition();

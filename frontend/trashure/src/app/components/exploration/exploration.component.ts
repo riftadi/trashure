@@ -26,6 +26,7 @@ export class ExplorationComponent {
   tutorialIndex = 0;
   hasNextSlide = true;
   tutorialFinished = false;
+  paused = false;
 
   constructor(private cdRef:ChangeDetectorRef, public game: GameService, public dialog: MatDialog, private router: Router) {
   }
@@ -34,10 +35,17 @@ export class ExplorationComponent {
     if(this.game.currentGame) {
       this.gameObject = this.game.currentGame;
       console.log(this.gameObject);
-      $('#tutorialModal').modal();
+      this.showTutorial();
     } else {
       this.router.navigate(['/game/menu']);
     }
+  }
+
+  showTutorial() {
+    this.paused = true;
+    this.tutorialIndex = 0;
+    this.tutorialFinished = false;
+    $('#tutorialModal').modal();
   }
 
   nextTutorialSlide() {
@@ -48,8 +56,13 @@ export class ExplorationComponent {
   }
 
   closeTutorial() {
+    this.paused = false;
     this.tutorialFinished = true;
     this.startTimer();
+  }
+
+  exitGame() {
+    this.paused = true;
   }
 
   resetGame() {
@@ -74,11 +87,13 @@ export class ExplorationComponent {
   startTimer(){
     if(this.tutorialFinished) {
       var interval = setInterval(() => {
-        this.timer--;
-        if(this.timer === 0 ){
-          clearInterval(interval);
-          this.finishGame();
-        };
+        if(!this.paused) {
+          this.timer--;
+          if(this.timer === 0 ){
+            clearInterval(interval);
+            this.finishGame();
+          };
+        }
       }, 1000);
     }
   }
